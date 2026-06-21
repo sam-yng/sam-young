@@ -1,46 +1,38 @@
-# Astro Starter Kit: Basics
+# Sam Young
 
-```sh
-bun create astro@latest -- --template basics
+Personal portfolio for showing work Sam has genuinely shipped. Built with
+[Astro](https://astro.build/) and Bun.
+
+## Local development
+
+```bash
+bun install
+bun run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Run the completion gate with:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```bash
+bun run check
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Biome provides linting and formatting:
 
-## 🧞 Commands
+```bash
+bun run lint
+bun run format
+```
 
-All commands are run from the root of the project, from a terminal:
+## Pull-request checks
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
+The `Code quality` GitHub Actions workflow runs documentation integrity,
+formatting, linting, and a production build for pull requests targeting `main`,
+merge-queue checks, and pushes to `main`.
 
-## 👀 Want to learn more?
+To make it a hard merge gate, configure the repository's `main` ruleset to
+require the `Formatting and linting` status check. The workflow publishes that
+check, while the GitHub ruleset controls whether a merge may bypass it.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Repository conventions and agent guardrails start in [`AGENTS.md`](AGENTS.md).
+The UI and UX direction will be informed by a forthcoming Claude design
+handoff, tracked in [`docs/DESIGN.md`](docs/DESIGN.md).

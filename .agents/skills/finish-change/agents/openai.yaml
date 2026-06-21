@@ -1,0 +1,4 @@
+interface:
+  display_name: "Finish Change"
+  short_description: "Close out a change with proportionate checks"
+  default_prompt: "Use $finish-change to verify and hand off this completed change."

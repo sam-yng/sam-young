@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify Site Change"
+  short_description: "Validate visual and functional site changes"
+  default_prompt: "Use $verify-site-change to validate this website change."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Check Repo Knowledge"
+  short_description: "Find drift in repository documentation"
+  default_prompt: "Use $check-repo-knowledge to audit the repository knowledge base."
