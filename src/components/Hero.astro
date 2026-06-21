@@ -1,0 +1,35 @@
+---
+---
+
+<section class="hero">
+	<h1>Hi.</h1>
+</section>
+
+<script>
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	gsap.from('.hero h1', {
+		scrollTrigger: '.hero',
+		y: 100,
+		opacity: 0,
+		duration: 1,
+	});
+</script>
+
+<style>
+	.hero {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.hero h1 {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		font-size: clamp(3rem, 12vw, 9rem);
+		margin: 0;
+	}
+</style>
