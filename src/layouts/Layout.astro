@@ -1,32 +1,73 @@
 ---
 import "lenis/dist/lenis.css";
 import "../styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Sam Young — Design engineer",
+	description = "Sam Young designs and builds thoughtful, playful things for the web.",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#fbf8f1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+		<script is:inline>document.documentElement.classList.add("js");</script>
 	</head>
 	<body>
+		<a class="skip-link" href="#work">Skip to selected work</a>
 		<slot />
 
 		<script>
-			import gsap from 'gsap';
-			import { ScrollTrigger } from 'gsap/ScrollTrigger';
-			import Lenis from 'lenis';
+			import Lenis from "lenis";
 
-			gsap.registerPlugin(ScrollTrigger);
+			const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-			const lenis = new Lenis();
-			lenis.on('scroll', ScrollTrigger.update);
-			gsap.ticker.add((time) => lenis.raf(time * 1000));
-			gsap.ticker.lagSmoothing(0);
+			if (!reduceMotion.matches) {
+				const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+
+				function frame(time: number) {
+					lenis.raf(time);
+					requestAnimationFrame(frame);
+				}
+
+				requestAnimationFrame(frame);
+			}
+
+			const reveals = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+
+			function revealAll() {
+				for (const element of reveals) element.classList.add("is-visible");
+			}
+
+			if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+				revealAll();
+			} else {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							if (!entry.isIntersecting) continue;
+							entry.target.classList.add("is-visible");
+							observer.unobserve(entry.target);
+						}
+					},
+					{ threshold: 0.12 },
+				);
+
+				for (const element of reveals) observer.observe(element);
+				window.setTimeout(revealAll, 1600);
+			}
 		</script>
 	</body>
 </html>

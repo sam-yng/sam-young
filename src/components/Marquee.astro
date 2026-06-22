@@ -1,0 +1,62 @@
+<div class="marquee" aria-label="Selected work">
+	<div class="marquee__track">
+		<div class="marquee__group">
+			<span>Selected work</span><span aria-hidden="true">✦</span>
+			<span>Selected work</span><span aria-hidden="true">✦</span>
+			<span>Selected work</span><span aria-hidden="true">✦</span>
+			<span>Selected work</span><span aria-hidden="true">✦</span>
+		</div>
+		<div class="marquee__group" aria-hidden="true">
+			<span>Selected work</span><span>✦</span>
+			<span>Selected work</span><span>✦</span>
+			<span>Selected work</span><span>✦</span>
+			<span>Selected work</span><span>✦</span>
+		</div>
+	</div>
+</div>
+
+<style>
+	.marquee {
+		overflow: hidden;
+		background: var(--ink-900);
+		border-block: var(--bw-bold) solid var(--ink-900);
+		color: var(--paper-100);
+	}
+
+	.marquee__track {
+		display: flex;
+		width: max-content;
+		animation: marquee 26s linear infinite;
+	}
+
+	.marquee:hover .marquee__track {
+		animation-play-state: paused;
+	}
+
+	.marquee__group {
+		display: flex;
+		align-items: center;
+		flex-shrink: 0;
+		gap: var(--space-8);
+		padding: 12px var(--space-4);
+		font: 600 18px / 1 var(--font-display);
+		white-space: nowrap;
+	}
+
+	.marquee__group span:nth-child(even) {
+		color: var(--volt-500);
+		font-size: var(--text-xs);
+	}
+
+	@keyframes marquee {
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.marquee__track {
+			animation: none;
+		}
+	}
+</style>

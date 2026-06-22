@@ -1,11 +1,18 @@
 ---
-import FeatureSection from "../components/FeatureSection.astro";
+import About from "../components/About.astro";
+import ContactFooter from "../components/ContactFooter.astro";
+import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import Work from "../components/Work.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Hero />
-	<FeatureSection title="Smooth by default." body="Lenis drives the scroll, GSAP ScrollTrigger drives the reveals." />
-	<FeatureSection title="Per-component animations." body="Each section owns its own scroll-triggered motion." />
+	<Header />
+	<main>
+		<Hero />
+		<Work />
+		<About />
+	</main>
+	<ContactFooter />
 </Layout>

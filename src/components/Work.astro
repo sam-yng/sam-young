@@ -1,0 +1,142 @@
+---
+import Marquee from "./Marquee.astro";
+
+const projectSlots = [
+	{ index: "01", glyph: "◳" },
+	{ index: "02", glyph: "⌗" },
+	{ index: "03", glyph: "◎" },
+];
+---
+
+<section id="work" aria-labelledby="work-title">
+	<Marquee />
+
+	<div class="work__inner">
+		<div class="work__header" data-reveal>
+			<h2 id="work-title">Things I’ve shipped</h2>
+			<p>// project details pending</p>
+		</div>
+
+		<div class="work__grid">
+			{projectSlots.map((project) => (
+				<article class="project-card" data-reveal>
+					<div class="project-card__visual" aria-hidden="true">{project.glyph}</div>
+					<div class="project-card__body">
+						<div class="project-card__meta"><span>{project.index}</span><span>—</span></div>
+						<h3>Project slot {project.index}</h3>
+						<p>Verified project details, contribution, and destination will go here.</p>
+						<span class="project-card__status">Content pending</span>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.work__inner {
+		max-width: var(--container-wide);
+		margin: 0 auto;
+		padding: clamp(56px, 8vw, 104px) var(--gutter);
+	}
+
+	.work__header {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: var(--space-4);
+		margin-bottom: var(--space-10);
+		flex-wrap: wrap;
+	}
+
+	h2 {
+		font: 800 clamp(38px, 5vw, 60px) / 1 var(--font-display);
+		letter-spacing: var(--tracking-tight);
+	}
+
+	.work__header p {
+		color: var(--text-muted);
+		font: var(--type-mono-meta);
+	}
+
+	.work__grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(16px, 2vw, 24px);
+	}
+
+	.project-card {
+		overflow: hidden;
+		background: var(--paper-000);
+		border: var(--bw-bold) solid var(--ink-900);
+		border-radius: var(--radius-md);
+		box-shadow: var(--shadow-hard);
+	}
+
+	.project-card__visual {
+		display: grid;
+		aspect-ratio: 16 / 9;
+		place-items: center;
+		background: var(--volt-500);
+		border-bottom: var(--bw-bold) solid var(--ink-900);
+		color: var(--ink-900);
+		font: 500 clamp(42px, 7vw, 78px) / 1 var(--font-mono);
+	}
+
+	.project-card:nth-child(2) .project-card__visual {
+		background: var(--ink-900);
+		color: var(--paper-100);
+	}
+
+	.project-card:nth-child(3) .project-card__visual {
+		background: var(--paper-200);
+	}
+
+	.project-card__body {
+		display: flex;
+		min-height: 220px;
+		flex-direction: column;
+		gap: var(--space-3);
+		padding: var(--space-5);
+	}
+
+	.project-card__meta {
+		display: flex;
+		justify-content: space-between;
+		color: var(--text-muted);
+		font: var(--type-mono-meta);
+	}
+
+	h3 {
+		font: 700 var(--text-xl) / 1.05 var(--font-display);
+		letter-spacing: var(--tracking-snug);
+	}
+
+	.project-card__body > p {
+		font: var(--type-small);
+	}
+
+	.project-card__status {
+		align-self: flex-start;
+		margin-top: auto;
+		padding: 6px 10px;
+		background: var(--paper-200);
+		border: var(--bw-hair) solid var(--ink-200);
+		border-radius: var(--radius-pill);
+		color: var(--text-muted);
+		font: 500 var(--text-3xs) / 1 var(--font-mono);
+		text-transform: uppercase;
+	}
+
+	@media (max-width: 900px) {
+		.work__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 600px) {
+		.work__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

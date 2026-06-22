@@ -1,35 +1,148 @@
 ---
+import cloud from "../assets/sam-cloud.png";
 ---
 
-<section class="hero">
-	<h1>Hi.</h1>
+<section class="hero" id="top" aria-labelledby="hero-title">
+	<p class="eyebrow" data-reveal>// design engineer · sydney</p>
+
+	<div class="hero__grid">
+		<h1 id="hero-title" data-reveal>
+			Building<br />
+			<em>weird</em>, fast<br />
+			things for<br />
+			the web<span>.</span>
+		</h1>
+
+		<div class="hero__visual" data-reveal>
+			<img
+				class="hero__cloud"
+				src={cloud.src}
+				width={cloud.width}
+				height={cloud.height}
+				alt="A deadpan, bright green thought cloud"
+				fetchpriority="high"
+			/>
+		</div>
+	</div>
+
+	<div class="hero__intro" data-reveal>
+		<p>
+			I’m <strong>Sam Young</strong> — a design engineer building thoughtful, playful interfaces for the web.
+		</p>
+		<div class="hero__actions">
+			<a class="sticker-button sticker-button--volt" href="#work">See the work <span aria-hidden="true">↓</span></a>
+			<a class="sticker-button sticker-button--ink" href="#contact">Say hi</a>
+		</div>
+	</div>
 </section>
-
-<script>
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-	gsap.registerPlugin(ScrollTrigger);
-
-	gsap.from('.hero h1', {
-		scrollTrigger: '.hero',
-		y: 100,
-		opacity: 0,
-		duration: 1,
-	});
-</script>
 
 <style>
 	.hero {
-		min-height: 100vh;
+		max-width: var(--container-wide);
+		margin: 0 auto;
+		padding: clamp(48px, 9vw, 120px) var(--gutter) clamp(48px, 7vw, 92px);
+	}
+
+	.hero > .eyebrow {
+		margin-bottom: var(--space-6);
+	}
+
+	.hero__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+		gap: clamp(8px, 3vw, 48px);
+		align-items: center;
+	}
+
+	h1 {
+		margin: 0;
+		font: 800 clamp(54px, 8vw, 112px) / 0.92 var(--font-display);
+		letter-spacing: var(--tracking-tight);
+		text-wrap: balance;
+	}
+
+	h1 em {
+		font-style: italic;
+	}
+
+	h1 > span {
+		color: var(--volt-600);
+	}
+
+	.hero__visual {
 		display: flex;
+		min-height: clamp(340px, 38vw, 540px);
 		align-items: center;
 		justify-content: center;
 	}
 
-	.hero h1 {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		font-size: clamp(3rem, 12vw, 9rem);
+	.hero__cloud {
+		width: min(100%, 500px);
+		height: auto;
+		filter: drop-shadow(0 18px 22px rgba(14, 14, 12, 0.1));
+		animation: cloud-drift 7s ease-in-out infinite;
+		will-change: transform;
+	}
+
+	.hero__intro {
+		display: flex;
+		align-items: flex-start;
+		gap: clamp(24px, 4vw, 56px);
+		margin-top: clamp(28px, 4vw, 52px);
+		flex-wrap: wrap;
+	}
+
+	.hero__intro > p {
+		max-width: 46ch;
 		margin: 0;
+		font: var(--type-body-lg);
+	}
+
+	.hero__intro strong {
+		color: var(--ink-900);
+	}
+
+	.hero__actions {
+		display: flex;
+		gap: var(--space-3);
+		flex-wrap: wrap;
+	}
+
+	@keyframes cloud-drift {
+		0%,
+		100% {
+			transform: translate3d(0, 0, 0) rotate(-2deg);
+		}
+
+		50% {
+			transform: translate3d(6px, -15px, 0) rotate(2deg);
+		}
+	}
+
+	@media (max-width: 760px) {
+		.hero__grid {
+			grid-template-columns: 1fr;
+		}
+
+		h1 {
+			font-size: clamp(50px, 15vw, 78px);
+		}
+
+		.hero__visual {
+			min-height: 0;
+			margin: var(--space-8) auto 0;
+			width: min(84vw, 430px);
+		}
+
+		.hero__intro {
+			margin-top: var(--space-8);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero__cloud {
+			animation: none;
+			will-change: auto;
+		}
 	}
 </style>

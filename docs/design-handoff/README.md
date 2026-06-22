@@ -1,10 +1,17 @@
 # Claude design handoff
 
-The Claude design handoff has not been provided yet.
+The Claude design handoff received on 22 June 2026 is preserved as
+[`sam-young-design-system.zip`](sam-young-design-system.zip).
 
-Place the source artifact or a faithful text export here when it arrives. Then
-update [`../DESIGN.md`](../DESIGN.md) with the accepted, durable UI and UX
-decisions so agents can discover them without relying on external conversation
-history.
+- SHA-256:
+  `e204e73630b7cb7d6d5fb6ccc103ac6fc870ca173447c4ae32023f97edd97d70`
+- Original filename: `Sam Young — Design System.zip`
+- Contents: design tokens, component and UI-kit references, the personal-site
+  template, screenshots, source imagery, and the handoff’s own guidance.
 
-Do not fill this directory with speculative mock guidance in the meantime.
+The archive is reference material, not production code. Accepted durable
+decisions and deliberate departures are distilled in [`../DESIGN.md`](../DESIGN.md).
+Content-truth boundaries are recorded in [`../CONTENT.md`](../CONTENT.md).
+
+Notably, the source archive contains both `sam-cloud` and `sam-hero`; the live
+site intentionally imports only `sam-cloud`.
