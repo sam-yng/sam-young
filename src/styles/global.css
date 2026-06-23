@@ -1,44 +1,157 @@
 @import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..600&display=swap");
 
+/* ============================================================
+   Sam Young — design-system tokens
+   This file mirrors the canonical token sheet from the Claude
+   design handoff (see docs/DESIGN.md). Components compose these
+   tokens and must not start a parallel palette or type system.
+   Cobalt and Flush are defined for completeness but stay off in
+   the default UI, which uses only the Volt accent.
+   ============================================================ */
+
 :root {
+	/* Ink ramp (near-black to warm grays) */
 	--ink-900: #0e0e0c;
 	--ink-800: #1d1e18;
 	--ink-700: #34352c;
 	--ink-600: #52534768;
 	--ink-600-solid: #525347;
+	--ink-500: #6f70627f;
 	--ink-500-solid: #6f7062;
 	--ink-400: #9a9b8c;
+	--ink-300: #c3c4b6;
 	--ink-200: #deded2;
+	--ink-100: #edede3;
+
+	/* Paper ramp (warm creams) */
 	--paper-000: #ffffff;
 	--paper-100: #fbf8f1;
 	--paper-200: #f4f1e8;
 	--paper-300: #e8e4d8;
+
+	/* Accent: Volt (primary pop) */
 	--volt-500: #d6ff3f;
 	--volt-600: #c2ee1f;
 	--volt-400: #e4ff79;
+	--volt-200: #f0ffb4;
+
+	/* Accent: Cobalt — defined but off in the default UI */
+	--cobalt-500: #2e4bff;
+	--cobalt-600: #1f37e0;
+	--cobalt-400: #6478ff;
+	--cobalt-100: #dfe3ff;
+
+	/* Accent: Flush — defined but off in the default UI */
+	--flush-500: #ff5c49;
+	--flush-600: #ed4330;
+	--flush-300: #ff9a8c;
+	--flush-100: #ffe2dc;
+
+	/* Semantic status */
+	--ok-500: #1f9d55;
+	--warn-500: #f0a92b;
+	--danger-500: #e23b2e;
+
+	/* Surfaces */
 	--surface-page: var(--paper-100);
+	--surface-card: var(--paper-000);
+	--surface-sunken: var(--paper-200);
+	--surface-ink: var(--ink-900);
+	--surface-volt: var(--volt-500);
+
+	/* Text */
 	--text-strong: var(--ink-900);
 	--text-body: var(--ink-800);
 	--text-muted: var(--ink-500-solid);
+	--text-faint: var(--ink-400);
+	--text-on-ink: var(--paper-100);
+	--text-on-volt: var(--ink-900);
+	--text-link: var(--ink-900);
+
+	/* Lines */
+	--border-ink: var(--ink-900);
+	--border-soft: var(--ink-200);
+	--border-hair: var(--paper-300);
+
+	/* Accent roles */
+	--accent: var(--volt-500);
+	--accent-strong: var(--volt-600);
+
+	/* Selection */
+	--selection-bg: var(--volt-500);
+	--selection-fg: var(--ink-900);
+
+	/* Families */
 	--font-display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
 	--font-sans: "Geist", system-ui, -apple-system, sans-serif;
 	--font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+	/* Type scale */
 	--text-3xs: 11px;
 	--text-2xs: 12px;
 	--text-xs: 13px;
 	--text-sm: 14px;
 	--text-base: 16px;
 	--text-md: 18px;
+	--text-lg: 21px;
 	--text-xl: 26px;
+	--text-2xl: 33px;
+	--text-3xl: 44px;
+	--text-4xl: 60px;
+	--text-5xl: 80px;
+	--text-6xl: 108px;
+
+	/* Weights */
+	--weight-regular: 400;
+	--weight-medium: 500;
+	--weight-semibold: 600;
+	--weight-bold: 700;
+	--weight-display: 800;
+
+	/* Line heights */
+	--leading-tight: 0.98;
+	--leading-snug: 1.1;
+	--leading-normal: 1.5;
+	--leading-relaxed: 1.65;
+
+	/* Tracking */
 	--tracking-tight: -0.03em;
 	--tracking-snug: -0.01em;
+	--tracking-normal: 0em;
+	--tracking-wide: 0.04em;
 	--tracking-mono: 0.02em;
 	--tracking-caps: 0.12em;
-	--type-body: 400 var(--text-base) / 1.65 var(--font-sans);
-	--type-body-lg: 400 var(--text-md) / 1.65 var(--font-sans);
-	--type-small: 400 var(--text-sm) / 1.5 var(--font-sans);
-	--type-mono-label: 500 var(--text-2xs) / 1 var(--font-mono);
-	--type-mono-meta: 400 var(--text-xs) / 1.5 var(--font-mono);
+
+	/* Semantic type roles */
+	--type-display:
+		var(--weight-display) var(--text-5xl) / var(--leading-tight)
+		var(--font-display);
+	--type-h1:
+		var(--weight-display) var(--text-4xl) / var(--leading-tight)
+		var(--font-display);
+	--type-h2:
+		var(--weight-bold) var(--text-3xl) / var(--leading-snug) var(--font-display);
+	--type-h3:
+		var(--weight-bold) var(--text-2xl) / var(--leading-snug) var(--font-display);
+	--type-h4:
+		var(--weight-semibold) var(--text-xl) / var(--leading-snug) var(--font-sans);
+	--type-body:
+		var(--weight-regular) var(--text-base) / var(--leading-relaxed)
+		var(--font-sans);
+	--type-body-lg:
+		var(--weight-regular) var(--text-md) / var(--leading-relaxed)
+		var(--font-sans);
+	--type-small:
+		var(--weight-regular) var(--text-sm) / var(--leading-normal)
+		var(--font-sans);
+	--type-mono-label: var(--weight-medium) var(--text-2xs) / 1 var(--font-mono);
+	--type-mono-meta:
+		var(--weight-regular) var(--text-xs) / var(--leading-normal)
+		var(--font-mono);
+
+	/* Spacing — 4px base grid */
+	--space-0: 0;
+	--space-1: 4px;
 	--space-2: 8px;
 	--space-3: 12px;
 	--space-4: 16px;
@@ -46,24 +159,58 @@
 	--space-6: 24px;
 	--space-8: 32px;
 	--space-10: 40px;
+	--space-12: 48px;
+	--space-16: 64px;
+	--space-20: 80px;
+	--space-24: 96px;
+	--space-32: 128px;
+	--space-40: 160px;
+
+	/* Containers and section rhythm */
+	--container-prose: 64ch;
+	--container-narrow: 720px;
 	--container: 1080px;
 	--container-wide: 1320px;
 	--gutter: clamp(20px, 5vw, 64px);
+	--section-y: clamp(64px, 12vh, 160px);
+
+	/* Radii — mostly sharp and technical */
+	--radius-none: 0px;
+	--radius-xs: 3px;
 	--radius-sm: 6px;
 	--radius-md: 10px;
+	--radius-lg: 16px;
 	--radius-pill: 999px;
+
+	/* Border widths */
 	--bw-hair: 1px;
 	--bw: 1.5px;
 	--bw-bold: 2px;
+	--bw-chunky: 3px;
+
+	/* Hard offset shadows — the signature look */
 	--shadow-hard-sm: 2px 2px 0 var(--ink-900);
 	--shadow-hard: 4px 4px 0 var(--ink-900);
 	--shadow-hard-lg: 6px 6px 0 var(--ink-900);
+	--shadow-hard-volt: 4px 4px 0 var(--volt-600);
+
+	/* Soft shadows — for overlays and app surfaces */
+	--shadow-soft-sm: 0 1px 2px rgb(19 20 15 / 8%);
+	--shadow-soft: 0 4px 16px rgb(19 20 15 / 10%);
+	--shadow-soft-lg: 0 18px 48px rgb(19 20 15 / 16%);
+
+	/* Motion — easing */
 	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 	--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+
+	/* Motion — durations */
 	--dur-1: 120ms;
 	--dur-2: 200ms;
 	--dur-3: 320ms;
 	--dur-4: 520ms;
+	--dur-slow: 820ms;
 }
 
 *,
@@ -128,8 +275,8 @@ footer[id] {
 }
 
 ::selection {
-	background: var(--volt-500);
-	color: var(--ink-900);
+	background: var(--selection-bg);
+	color: var(--selection-fg);
 }
 
 :focus-visible {

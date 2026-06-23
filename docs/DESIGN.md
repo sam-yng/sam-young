@@ -2,10 +2,13 @@
 
 ## Status and source
 
-The Claude design handoff was received on 22 June 2026. Its original ZIP is
+The Claude design handoff was received on 22 June 2026; a self-contained
+standalone export of the same system was reviewed on 23 June 2026. Both are
 preserved in [`design-handoff/`](design-handoff/README.md). This document records
 the decisions accepted into the live Astro site so future work does not depend
-on unpacking the source artifact.
+on unpacking the source artifacts. The standalone export confirmed the existing
+foundations rather than changing them; its only new material is fabricated demo
+content, which remains excluded (see Deliberate departures).
 
 The intended experience is a high-fidelity, single-page personal portfolio with
 a sticky header, hero, selected-work marquee and grid, inverted about section,
@@ -27,9 +30,12 @@ motion.
 - Keep copy direct, compact, first-person, and lightly playful. Mono labels use
   uppercase code-comment styling such as `// about`.
 
-The code-native design tokens live in `src/styles/global.css`. Component-scoped
-styles may compose those tokens but should not create a parallel palette or type
-system.
+The code-native design tokens live in `src/styles/global.css`, which mirrors the
+handoff’s canonical token sheet: the full ink and paper ramps, the Volt accent,
+type and spacing scales, radii, border widths, hard and soft shadows, and the
+easing and duration sets. Cobalt and Flush are defined for completeness but stay
+off in the default UI, which uses only Volt. Component-scoped styles may compose
+these tokens but should not create a parallel palette or type system.
 
 ## Site map
 
@@ -61,6 +67,11 @@ system.
 - Prototype projects, years, metrics, tools, links, social profiles, and contact
   details were not accepted as factual portfolio content. The live grid and
   contact card use explicit placeholders until Sam supplies verified details.
+  The standalone export’s six demo projects and generic tool list are design
+  fixtures, not a content source.
+- Availability and tenure claims are not reproduced. The standalone’s “Open to
+  work” header tag and its multi-year duration copy are not accepted until Sam
+  confirms them.
 - The prototype’s fake-success contact form is not reproduced. A form must not
   claim delivery until a real endpoint and approved contact destination exist.
 - The starter Astro favicon was replaced with a code-native Volt `SY` mark.

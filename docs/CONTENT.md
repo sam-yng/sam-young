@@ -30,8 +30,9 @@ The following content is still unresolved and must remain visibly provisional:
 - public email address, social/profile links, and contact-form delivery; and
 - any claim about response time, availability, or commercial engagement.
 
-The prototype names and blurbs inside the archived design-system ZIP are design
-fixtures, not a content database. Do not publish them without Sam’s confirmation.
+The prototype names and blurbs inside the archived design handoff — both the ZIP
+and the standalone export — are design fixtures, not a content database. Do not
+publish them without Sam’s confirmation.
 
 ## Project entry minimum
 
