@@ -34,15 +34,46 @@ const {
 
 			const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+			let lenis: Lenis | null = null;
+
 			if (!reduceMotion.matches) {
-				const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+				lenis = new Lenis({ duration: 1.1, smoothWheel: true });
 
 				function frame(time: number) {
-					lenis.raf(time);
+					lenis?.raf(time);
 					requestAnimationFrame(frame);
 				}
 
 				requestAnimationFrame(frame);
+			}
+
+			// Smooth-scroll in-page navigation (nav bar, skip link, logo, CTAs).
+			// Offsets for the sticky header; falls back to native behaviour when
+			// Lenis is off (reduced motion).
+			const HEADER_OFFSET = 64;
+
+			for (const link of document.querySelectorAll<HTMLAnchorElement>(
+				'a[href^="#"]',
+			)) {
+				link.addEventListener("click", (event) => {
+					const id = link.getAttribute("href")?.slice(1);
+					if (!id) return;
+
+					const target = document.getElementById(id);
+					if (!target) return;
+
+					event.preventDefault();
+
+					if (lenis) {
+						lenis.scrollTo(target, { offset: -HEADER_OFFSET });
+					} else {
+						target.scrollIntoView({
+							behavior: reduceMotion.matches ? "auto" : "smooth",
+						});
+					}
+
+					history.pushState(null, "", `#${id}`);
+				});
 			}
 
 			const reveals = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));

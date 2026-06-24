@@ -2,142 +2,60 @@
 import cloud from "../assets/sam-cloud.png";
 ---
 
-<section class="about" id="about" aria-labelledby="about-title">
+<section
+	class="relative overflow-hidden border-t-2 border-ink-900 bg-ink-900 text-paper-100"
+	id="about"
+	aria-labelledby="about-title"
+>
 	<img
-		class="about__cloud"
+		class="pointer-events-none absolute top-[-3%] left-[3%] h-auto w-[clamp(82px,10vw,145px)] animate-cloud-bob-flip drop-shadow-[0_0_34px_rgb(214_255_63_/_30%)] motion-reduce:animate-none motion-reduce:[transform:scaleX(-1)]"
 		src={cloud.src}
 		width={cloud.width}
 		height={cloud.height}
 		alt=""
 		aria-hidden="true"
 	/>
-	<div class="about__inner">
-		<p class="eyebrow" data-reveal>// about</p>
-		<h2 id="about-title" data-reveal>I care about the <span>seam</span> between craft and code.</h2>
-		<div class="about__copy">
-			<p data-reveal>
+	<div class="mx-auto max-w-[var(--container)] px-[var(--gutter)] py-[clamp(80px,10vw,140px)]">
+		<p class="eyebrow mb-8 text-volt-500" data-reveal>// about</p>
+		<h2
+			id="about-title"
+			class="mb-10 max-w-[18ch] text-paper-100 tracking-[var(--tracking-tight)] [font:800_clamp(36px,5.5vw,64px)/1.04_var(--font-display)]"
+			data-reveal
+		>
+			I care about the <span class="text-volt-500">seam</span> between craft and code.
+		</h2>
+		<div
+			class="grid grid-cols-2 gap-[clamp(24px,4vw,56px)] max-[640px]:grid-cols-1"
+		>
+			<p class="m-0 text-ink-200 [font:var(--type-body-lg)]" data-reveal>
 				I work where design and engineering overlap, turning rough ideas into interfaces that are fast, considered, and a little bit fun.
 			</p>
-			<p data-reveal>
+			<p class="m-0 text-ink-200 [font:var(--type-body-lg)]" data-reveal>
 				I like motion that means something, type that does the heavy lifting, and getting the thing into people’s hands.
 			</p>
 		</div>
-		<div class="about__stack" data-reveal>
-			<p>this site =</p>
-			<ul aria-label="Technology used to build this site">
-				<li>Astro</li>
-				<li>GSAP</li>
-				<li>Lenis</li>
+		<div class="mt-[clamp(32px,5vw,64px)]" data-reveal>
+			<p class="mb-4 text-ink-400 [font:var(--type-mono-meta)]">this site =</p>
+			<ul
+				class="m-0 flex flex-wrap gap-[10px] p-0 [list-style:none]"
+				aria-label="Technology used to build this site"
+			>
+				<li
+					class="rounded-pill border-[1.5px] border-ink-600 px-[13px] py-[7px] text-paper-100 [font:500_var(--text-xs)/1_var(--font-mono)] [letter-spacing:var(--tracking-mono)]"
+				>
+					Astro
+				</li>
+				<li
+					class="rounded-pill border-[1.5px] border-ink-600 px-[13px] py-[7px] text-paper-100 [font:500_var(--text-xs)/1_var(--font-mono)] [letter-spacing:var(--tracking-mono)]"
+				>
+					GSAP
+				</li>
+				<li
+					class="rounded-pill border-[1.5px] border-ink-600 px-[13px] py-[7px] text-paper-100 [font:500_var(--text-xs)/1_var(--font-mono)] [letter-spacing:var(--tracking-mono)]"
+				>
+					Lenis
+				</li>
 			</ul>
 		</div>
 	</div>
 </section>
-
-<style>
-	.about {
-		position: relative;
-		overflow: hidden;
-		background: var(--ink-900);
-		border-top: var(--bw-bold) solid var(--ink-900);
-		color: var(--paper-100);
-	}
-
-	.about__cloud {
-		position: absolute;
-		top: -3%;
-		left: 3%;
-		width: clamp(82px, 10vw, 145px);
-		height: auto;
-		filter: drop-shadow(0 0 34px rgb(214 255 63 / 30%));
-		pointer-events: none;
-		transform-origin: 50% 12%;
-		animation: cloud-sway 5.5s ease-in-out infinite;
-	}
-
-	.about__inner {
-		max-width: var(--container);
-		margin: 0 auto;
-		padding: clamp(80px, 10vw, 140px) var(--gutter);
-	}
-
-	.about .eyebrow {
-		margin-bottom: var(--space-8);
-		color: var(--volt-500);
-	}
-
-	h2 {
-		max-width: 18ch;
-		margin-bottom: var(--space-10);
-		color: var(--paper-100);
-		font: 800 clamp(36px, 5.5vw, 64px) / 1.04 var(--font-display);
-		letter-spacing: var(--tracking-tight);
-	}
-
-	h2 span {
-		color: var(--volt-500);
-	}
-
-	.about__copy {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: clamp(24px, 4vw, 56px);
-	}
-
-	.about__copy p {
-		margin: 0;
-		color: var(--ink-200);
-		font: var(--type-body-lg);
-	}
-
-	.about__stack {
-		margin-top: clamp(32px, 5vw, 64px);
-	}
-
-	.about__stack > p {
-		margin-bottom: var(--space-4);
-		color: var(--ink-400);
-		font: var(--type-mono-meta);
-	}
-
-	.about__stack ul {
-		display: flex;
-		gap: 10px;
-		margin: 0;
-		padding: 0;
-		flex-wrap: wrap;
-		list-style: none;
-	}
-
-	.about__stack li {
-		padding: 7px 13px;
-		border: var(--bw) solid var(--ink-600-solid);
-		border-radius: var(--radius-pill);
-		color: var(--paper-100);
-		font: 500 var(--text-xs) / 1 var(--font-mono);
-		letter-spacing: var(--tracking-mono);
-	}
-
-	@keyframes cloud-sway {
-		0%,
-		100% {
-			transform: scaleX(-1) rotate(-9deg);
-		}
-
-		50% {
-			transform: scaleX(-1) rotate(9deg);
-		}
-	}
-
-	@media (max-width: 640px) {
-		.about__copy {
-			grid-template-columns: 1fr;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.about__cloud {
-			animation: none;
-			transform: scaleX(-1);
-		}
-	}
-</style>

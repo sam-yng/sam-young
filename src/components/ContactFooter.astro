@@ -1,11 +1,20 @@
 ---
 import cloud from "../assets/sam-cloud.png";
 import Logo from "./Logo.astro";
+
+const fieldClass =
+	"w-full rounded-sm border-2 border-ink-900 bg-paper-100 px-3 py-[10px] text-ink-900 [font:var(--type-body)] transition-[box-shadow,background] duration-[120ms] ease-[var(--ease-out)] focus:bg-paper-000 focus:shadow-hard";
+const labelClass =
+	"[font:var(--type-mono-label)] [letter-spacing:var(--tracking-caps)] uppercase text-[var(--text-muted)]";
 ---
 
-<footer class="contact" id="contact" aria-labelledby="contact-title">
+<footer
+	class="relative overflow-hidden border-t-2 border-ink-900 bg-paper-100"
+	id="contact"
+	aria-labelledby="contact-title"
+>
 	<img
-		class="contact__cloud"
+		class="pointer-events-none absolute right-[-3%] bottom-[4%] h-auto w-[clamp(78px,10vw,140px)] animate-cloud-bob opacity-[0.92] motion-reduce:animate-none max-[700px]:bottom-[1%] max-[700px]:opacity-[0.55]"
 		src={cloud.src}
 		width={cloud.width}
 		height={cloud.height}
@@ -13,150 +22,112 @@ import Logo from "./Logo.astro";
 		aria-hidden="true"
 	/>
 
-	<div class="contact__inner">
-		<div class="contact__grid">
+	<div
+		class="mx-auto max-w-[var(--container)] px-[var(--gutter)] pt-[clamp(64px,9vw,128px)] pb-[clamp(28px,4vw,40px)]"
+	>
+		<div
+			class="grid grid-cols-2 items-center gap-[clamp(32px,6vw,72px)] max-[700px]:grid-cols-1"
+		>
 			<div data-reveal>
-				<p class="eyebrow">// got something weird to build?</p>
-				<h2 id="contact-title">Let’s<br />make it.</h2>
+				<p class="eyebrow mb-5 text-ink-900">// got something weird to build?</p>
+				<h2
+					id="contact-title"
+					class="tracking-[var(--tracking-tight)] [font:800_clamp(54px,8vw,92px)/0.94_var(--font-display)]"
+				>
+					Let’s<br />make it.
+				</h2>
 			</div>
 
-			<div class="contact-card" data-reveal>
-				<p class="contact-card__label">// contact route</p>
-				<h3>Details coming next.</h3>
-				<p>The layout is ready. A real email address or form endpoint still needs to be connected.</p>
-				<span class="sticker-button sticker-button--volt" aria-disabled="true">Contact details pending</span>
-			</div>
+			<form
+				class="flex flex-col gap-4 rounded-md border-2 border-ink-900 bg-paper-000 p-[clamp(24px,3vw,36px)] shadow-hard-lg"
+				data-reveal
+				data-contact-form
+				novalidate
+			>
+				<p class={labelClass}>// start a project</p>
+
+				<div class="flex flex-col gap-2">
+					<label class={labelClass} for="cf-name">Your name</label>
+					<input
+						class={fieldClass}
+						id="cf-name"
+						name="name"
+						type="text"
+						autocomplete="name"
+						placeholder="Ada Lovelace"
+						required
+					/>
+				</div>
+
+				<div class="flex flex-col gap-2">
+					<label class={labelClass} for="cf-email">Your email</label>
+					<input
+						class={fieldClass}
+						id="cf-email"
+						name="email"
+						type="email"
+						autocomplete="email"
+						placeholder="you@example.com"
+						required
+					/>
+				</div>
+
+				<div class="flex flex-col gap-2">
+					<label class={labelClass} for="cf-brief">What are we building?</label>
+					<textarea
+						class={`${fieldClass} min-h-[120px] resize-y`}
+						id="cf-brief"
+						name="brief"
+						rows="4"
+						placeholder="A weird, fast little corner of the web that…"
+						required></textarea>
+				</div>
+
+				<button
+					class="sticker-button sticker-button--volt mt-2 w-full hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:8px_8px_0_var(--ink-900)]"
+					type="submit"
+				>
+					Send it <span aria-hidden="true">→</span>
+				</button>
+
+				<p
+					class="m-0 text-[var(--text-muted)] [font:var(--type-mono-meta)]"
+					data-form-status
+					role="status"
+					aria-live="polite"
+				>
+				</p>
+			</form>
 		</div>
 
-		<div class="contact__subfooter">
-			<a href="#top" aria-label="Sam Young, back to top"><Logo size={30} /></a>
-			<p>© 2026 — built with too much care</p>
+		<div
+			class="mt-[clamp(48px,7vw,88px)] flex flex-wrap items-center justify-between gap-4 border-t-[1.5px] border-ink-900 pt-6"
+		>
+			<a
+				class="text-inherit no-underline"
+				href="#top"
+				aria-label="Sam Young, back to top"><Logo size={30} /></a
+			>
+			<p class="[font:var(--type-mono-meta)]">© 2026 — built with too much care</p>
 		</div>
 	</div>
 </footer>
 
-<style>
-	.contact {
-		position: relative;
-		overflow: hidden;
-		background: var(--paper-100);
-		border-top: var(--bw-bold) solid var(--ink-900);
-	}
+<script>
+	const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+	const status = form?.querySelector<HTMLElement>("[data-form-status]");
 
-	.contact__cloud {
-		position: absolute;
-		right: -3%;
-		bottom: 4%;
-		width: clamp(78px, 10vw, 140px);
-		height: auto;
-		opacity: 0.92;
-		pointer-events: none;
-		animation: cloud-bob 4s ease-in-out infinite;
-	}
+	form?.addEventListener("submit", (event) => {
+		event.preventDefault();
 
-	.contact__inner {
-		max-width: var(--container);
-		margin: 0 auto;
-		padding: clamp(64px, 9vw, 128px) var(--gutter) clamp(28px, 4vw, 40px);
-	}
-
-	.contact__grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: clamp(32px, 6vw, 72px);
-		align-items: center;
-	}
-
-	.contact .eyebrow {
-		margin-bottom: var(--space-5);
-		color: var(--ink-900);
-	}
-
-	h2 {
-		font: 800 clamp(54px, 8vw, 92px) / 0.94 var(--font-display);
-		letter-spacing: var(--tracking-tight);
-	}
-
-	.contact-card {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-4);
-		padding: clamp(24px, 3vw, 36px);
-		background: var(--paper-000);
-		border: var(--bw-bold) solid var(--ink-900);
-		border-radius: var(--radius-md);
-		box-shadow: var(--shadow-hard-lg);
-	}
-
-	.contact-card__label {
-		color: var(--text-muted);
-		font: var(--type-mono-label);
-		letter-spacing: var(--tracking-caps);
-		text-transform: uppercase;
-	}
-
-	.contact-card h3 {
-		font: 700 clamp(28px, 4vw, 40px) / 1.05 var(--font-display);
-		letter-spacing: var(--tracking-snug);
-	}
-
-	.contact-card > p:not(.contact-card__label) {
-		max-width: 42ch;
-		font: var(--type-body);
-	}
-
-	.contact-card .sticker-button {
-		align-self: stretch;
-		margin-top: var(--space-2);
-		cursor: not-allowed;
-		text-align: center;
-	}
-
-	.contact__subfooter {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: var(--space-4);
-		margin-top: clamp(48px, 7vw, 88px);
-		padding-top: var(--space-6);
-		border-top: var(--bw) solid var(--ink-900);
-		flex-wrap: wrap;
-	}
-
-	.contact__subfooter a {
-		color: inherit;
-		text-decoration: none;
-	}
-
-	.contact__subfooter p {
-		font: var(--type-mono-meta);
-	}
-
-	@keyframes cloud-bob {
-		0%,
-		100% {
-			transform: translate3d(0, 0, 0) scale(1);
+		if (!form.checkValidity()) {
+			form.reportValidity();
+			return;
 		}
 
-		50% {
-			transform: translate3d(0, -9px, 0) scale(1.07);
+		if (status) {
+			status.textContent =
+				"Thanks — this form isn’t connected to an inbox yet, so nothing was sent. A real destination is coming soon.";
 		}
-	}
-
-	@media (max-width: 700px) {
-		.contact__grid {
-			grid-template-columns: 1fr;
-		}
-
-		.contact__cloud {
-			bottom: 1%;
-			opacity: 0.55;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.contact__cloud {
-			animation: none;
-		}
-	}
-</style>
+	});
+</script>

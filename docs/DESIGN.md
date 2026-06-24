@@ -34,8 +34,9 @@ The code-native design tokens live in `src/styles/global.css`, which mirrors the
 handoff’s canonical token sheet: the full ink and paper ramps, the Volt accent,
 type and spacing scales, radii, border widths, hard and soft shadows, and the
 easing and duration sets. Cobalt and Flush are defined for completeness but stay
-off in the default UI, which uses only Volt. Component-scoped styles may compose
-these tokens but should not create a parallel palette or type system.
+off in the default UI, which uses only Volt. Components compose these tokens
+through Tailwind utilities bridged to the token sheet (and occasional scoped
+styles) but must not create a parallel palette or type system.
 
 ## Site map
 
@@ -44,8 +45,8 @@ these tokens but should not create a parallel palette or type system.
    work/contact calls to action, and the thought-cloud mascot.
 3. Full-width selected-work marquee followed by a responsive project-card grid.
 4. Inverted About section with a cloud cameo and compact site-stack chips.
-5. Contact footer with a large invitation, contact card, cloud cameo, logo, and
-   build note.
+5. Contact footer with a large invitation, a contact form (name, email, and a
+   “what are we building?” brief), cloud cameo, logo, and build note.
 
 ## Motion and interaction
 
@@ -56,7 +57,12 @@ these tokens but should not create a parallel palette or type system.
   JavaScript, and a safety timeout reveals any observed element after 1.6s.
 - The marquee loops in 26 seconds and pauses on hover.
 - Buttons lift and grow their hard shadow on hover, then press flat on active.
-- Hero, About, and footer cloud instances use distinct transform-only motion.
+- Hero, About, and footer cloud instances share one bob (`translateY` 0 → −20px
+  over 5s, `ease-in-out`) so their vertical motion and timing align exactly; the
+  About cameo keeps its horizontal mirror via a flipped variant of that bob.
+- Clicking an in-page anchor (nav, skip link, logo, hero CTAs) smooth-scrolls to
+  the section with a header offset, via Lenis when motion is allowed and native
+  smooth scroll otherwise.
 - `prefers-reduced-motion` disables smooth scrolling, cloud motion, the marquee,
   and reveal movement.
 
@@ -72,9 +78,20 @@ these tokens but should not create a parallel palette or type system.
 - Availability and tenure claims are not reproduced. The standalone’s “Open to
   work” header tag and its multi-year duration copy are not accepted until Sam
   confirms them.
-- The prototype’s fake-success contact form is not reproduced. A form must not
-  claim delivery until a real endpoint and approved contact destination exist.
+- The prototype’s fake-success contact form is not reproduced. The footer now
+  carries a real, accessible contact form (name, email, build brief) with native
+  validation, but it is intentionally UI-only: on submit it states plainly that
+  the form is not yet connected to an inbox. It must not claim delivery until a
+  real endpoint and approved contact destination exist.
 - The starter Astro favicon was replaced with a code-native Volt `SY` mark.
+- Styling is authored in Tailwind utilities bridged to the canonical tokens (see
+  [`ARCHITECTURE.md`](ARCHITECTURE.md)); the token sheet remains the source of
+  truth, so this is an authoring change, not a palette or type-scale change.
+- The Hero and Work sections were narrowed from the 1320px wide container to the
+  1080px container to tighten the overall measure and unify section widths; the
+  `--container-wide` token is retained but no longer used by default.
+- Project cards were made more compact (shorter body, tighter padding, smaller
+  glyph and title) while keeping the 3 → 2 → 1 responsive grid and sticker look.
 
 ## Verification
 
