@@ -1,35 +1,56 @@
 ---
+import cloud from "../assets/sam-cloud.png";
 ---
 
-<section class="hero">
-	<h1>Hi.</h1>
+<section
+	class="mx-auto max-w-[var(--container)] px-[var(--gutter)] pt-[clamp(48px,9vw,120px)] pb-[clamp(48px,7vw,92px)]"
+	id="top"
+	aria-labelledby="hero-title"
+>
+	<p class="eyebrow mb-6" data-reveal>// design engineer · sydney</p>
+
+	<div
+		class="grid grid-cols-1 items-center gap-[clamp(8px,3vw,48px)] min-[760px]:grid-cols-[minmax(0,1.08fr)_minmax(300px,0.92fr)]"
+	>
+		<h1
+			id="hero-title"
+			class="m-0 text-balance font-display text-[clamp(54px,8vw,112px)] font-extrabold leading-[0.92] tracking-[var(--tracking-tight)] max-[760px]:text-[clamp(50px,15vw,78px)]"
+			data-reveal
+		>
+			Building<br />
+			<em class="italic">weird</em>, fast<br />
+			things for<br />
+			the web<span class="text-volt-600">.</span>
+		</h1>
+
+		<div
+			class="flex min-h-[clamp(340px,34vw,540px)] items-center justify-center max-[760px]:mx-auto max-[760px]:mt-8 max-[760px]:min-h-0 max-[760px]:w-[min(84vw,430px)]"
+			data-reveal
+		>
+			<img
+				class="h-auto w-[min(100%,300px)] animate-cloud-bob drop-shadow-[0_18px_22px_rgba(14,14,12,0.1)] will-change-transform motion-reduce:animate-none"
+				src={cloud.src}
+				width={cloud.width}
+				height={cloud.height}
+				alt="A deadpan, bright green thought cloud"
+				fetchpriority="high"
+			/>
+		</div>
+	</div>
+
+	<div
+		class="mt-[clamp(28px,3vw,52px)] flex flex-wrap items-start gap-[clamp(24px,4vw,56px)] max-[760px]:mt-8"
+		data-reveal
+	>
+		<p class="m-0 max-w-[46ch] [font:var(--type-body-lg)]">
+			I’m <strong class="text-ink-900">Sam Young</strong> — a design engineer building
+			thoughtful, playful interfaces for the web.
+		</p>
+		<div class="flex flex-wrap gap-3">
+			<a class="sticker-button sticker-button--volt" href="#work"
+				>See the work <span aria-hidden="true">↓</span></a
+			>
+			<a class="sticker-button sticker-button--ink" href="#contact">Say hi</a>
+		</div>
+	</div>
 </section>
-
-<script>
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-	gsap.registerPlugin(ScrollTrigger);
-
-	gsap.from('.hero h1', {
-		scrollTrigger: '.hero',
-		y: 100,
-		opacity: 0,
-		duration: 1,
-	});
-</script>
-
-<style>
-	.hero {
-		min-height: 100vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.hero h1 {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		font-size: clamp(3rem, 12vw, 9rem);
-		margin: 0;
-	}
-</style>

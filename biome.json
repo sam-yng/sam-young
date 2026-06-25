@@ -6,7 +6,13 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["**", "!!**/dist", "!!**/.claude", "!!**/*.svg"]
+		"includes": [
+			"**",
+			"!!**/dist",
+			"!!**/.claude",
+			"!!**/*.svg",
+			"!!docs/design-handoff/*.html"
+		]
 	},
 	"formatter": {
 		"enabled": true,
@@ -34,6 +40,11 @@
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "double"
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
 		}
 	},
 	"assist": {

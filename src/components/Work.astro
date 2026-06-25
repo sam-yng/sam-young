@@ -1,0 +1,66 @@
+---
+import Marquee from "./Marquee.astro";
+
+const projectSlots = [
+	{ index: "01", glyph: "◳", visual: "bg-volt-500 text-ink-900" },
+	{ index: "02", glyph: "⌗", visual: "bg-ink-900 text-paper-100" },
+	{ index: "03", glyph: "◎", visual: "bg-paper-200 text-ink-900" },
+];
+---
+
+<section id="work" aria-labelledby="work-title">
+	<Marquee />
+
+	<div
+		class="mx-auto max-w-[var(--container)] px-[var(--gutter)] py-[clamp(56px,8vw,104px)]"
+	>
+		<div
+			class="mb-10 flex flex-wrap items-end justify-between gap-4"
+			data-reveal
+		>
+			<h2
+				id="work-title"
+				class="tracking-[var(--tracking-tight)] [font:800_clamp(38px,5vw,60px)/1_var(--font-display)]"
+			>
+				Things I’ve shipped
+			</h2>
+			<p class="text-[var(--text-muted)] [font:var(--type-mono-meta)]">
+				// project details pending
+			</p>
+		</div>
+
+		<div
+			class="grid grid-cols-3 gap-[clamp(14px,1.5vw,20px)] max-[900px]:grid-cols-2 max-[600px]:grid-cols-1"
+		>
+			{projectSlots.map((project) => (
+				<article
+					class="overflow-hidden rounded-md border-2 border-ink-900 bg-paper-000 shadow-hard"
+					data-reveal
+				>
+					<div
+						class={`grid aspect-video place-items-center border-b-2 border-ink-900 [font:500_clamp(34px,5vw,60px)/1_var(--font-mono)] ${project.visual}`}
+						aria-hidden="true"
+					>
+						{project.glyph}
+					</div>
+					<div class="flex min-h-[150px] flex-col gap-3 p-4">
+						<div class="flex justify-between text-[var(--text-muted)] [font:var(--type-mono-meta)]">
+							<span>{project.index}</span><span>—</span>
+						</div>
+						<h3 class="tracking-[var(--tracking-snug)] [font:700_var(--text-lg)/1.05_var(--font-display)]">
+							Project slot {project.index}
+						</h3>
+						<p class="[font:var(--type-small)]">
+							Verified project details, contribution, and destination will go here.
+						</p>
+						<span
+							class="mt-auto self-start rounded-pill border border-ink-200 bg-paper-200 px-[10px] py-[6px] text-[var(--text-muted)] uppercase [font:500_var(--text-3xs)/1_var(--font-mono)]"
+						>
+							Content pending
+						</span>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>

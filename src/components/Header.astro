@@ -1,0 +1,60 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<header
+	class="site-header sticky top-0 z-50 flex items-center justify-between border-b-[1.5px] border-transparent py-[14px] px-[var(--gutter)] transition-[background,border-color,backdrop-filter] duration-[320ms] ease-[var(--ease-out)] max-[480px]:py-3"
+	data-site-header
+>
+	<a
+		class="text-inherit no-underline"
+		href="#top"
+		aria-label="Sam Young, back to top"
+	>
+		<Logo />
+	</a>
+	<nav
+		class="flex items-center gap-[clamp(14px,2.5vw,30px)] max-[480px]:gap-3"
+		aria-label="Primary navigation"
+	>
+		<a
+			class="text-ink-900 uppercase underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-[120ms] ease-out hover:decoration-current [font:var(--type-mono-label)] [letter-spacing:var(--tracking-mono)] max-[480px]:text-[11px]"
+			href="#work">Work</a
+		>
+		<a
+			class="text-ink-900 uppercase underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-[120ms] ease-out hover:decoration-current [font:var(--type-mono-label)] [letter-spacing:var(--tracking-mono)] max-[480px]:text-[11px]"
+			href="#about">About</a
+		>
+		<a
+			class="text-ink-900 uppercase underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-[120ms] ease-out hover:decoration-current [font:var(--type-mono-label)] [letter-spacing:var(--tracking-mono)] max-[480px]:text-[11px]"
+			href="#contact">Contact</a
+		>
+	</nav>
+</header>
+
+<script>
+	const header = document.querySelector<HTMLElement>("[data-site-header]");
+
+	function updateHeader() {
+		header?.classList.toggle("is-scrolled", window.scrollY > 30);
+	}
+
+	updateHeader();
+	window.addEventListener("scroll", updateHeader, { passive: true });
+</script>
+
+<style>
+	/* JS-toggled scrolled state and a child-targeting reach into the
+	   Logo component — both awkward to express as utilities. */
+	.site-header.is-scrolled {
+		background: rgb(251 248 241 / 82%);
+		border-bottom-color: var(--ink-900);
+		backdrop-filter: blur(10px);
+	}
+
+	@media (max-width: 360px) {
+		.site-header :global(.logo__wordmark) {
+			display: none;
+		}
+	}
+</style>

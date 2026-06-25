@@ -34,5 +34,6 @@ require the `Formatting and linting` status check. The workflow publishes that
 check, while the GitHub ruleset controls whether a merge may bypass it.
 
 Repository conventions and agent guardrails start in [`AGENTS.md`](AGENTS.md).
-The UI and UX direction will be informed by a forthcoming Claude design
-handoff, tracked in [`docs/DESIGN.md`](docs/DESIGN.md).
+The accepted UI and UX direction from the Claude design handoff is documented
+in [`docs/DESIGN.md`](docs/DESIGN.md); the original source artifact is preserved
+under [`docs/design-handoff/`](docs/design-handoff/README.md).

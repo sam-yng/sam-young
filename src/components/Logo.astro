@@ -1,0 +1,47 @@
+---
+interface Props {
+	size?: number;
+}
+
+const { size = 34 } = Astro.props;
+---
+
+<span class="logo" style={`--logo-size: ${size}px`}>
+	<span class="logo__mark" aria-hidden="true">SY</span>
+	<span class="logo__wordmark">sam<span>.</span>young</span>
+</span>
+
+<style>
+	.logo {
+		display: inline-flex;
+		align-items: center;
+		gap: calc(var(--logo-size) * 0.3);
+	}
+
+	.logo__mark {
+		display: inline-flex;
+		width: var(--logo-size);
+		height: var(--logo-size);
+		flex: 0 0 auto;
+		align-items: center;
+		justify-content: center;
+		background: var(--volt-500);
+		border: var(--bw-bold) solid var(--ink-900);
+		border-radius: var(--radius-sm);
+		box-shadow: var(--shadow-hard-sm);
+		color: var(--ink-900);
+		font: 800 calc(var(--logo-size) * 0.46) / 1 var(--font-display);
+		letter-spacing: -0.04em;
+	}
+
+	.logo__wordmark {
+		color: var(--ink-900);
+		font: 800 calc(var(--logo-size) * 0.62) / 0.9 var(--font-display);
+		letter-spacing: -0.04em;
+		white-space: nowrap;
+	}
+
+	.logo__wordmark span {
+		color: var(--volt-600);
+	}
+</style>

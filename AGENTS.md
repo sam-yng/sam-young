@@ -37,10 +37,9 @@ bun run preview  # preview the production build
    or shipped work. Mark unknown content clearly instead of filling gaps.
 2. Never commit secrets, private contact details, or third-party material that
    Sam has not authorized for publication.
-3. Treat the forthcoming Claude design handoff as the intended source for UI
-   and UX decisions. Until it arrives, keep visual work minimal and reversible.
-   Once received, preserve it under `docs/design-handoff/` and distill durable
-   decisions into `docs/DESIGN.md`.
+3. Treat the archived Claude design handoff as the original UI and UX reference.
+   Preserve it under `docs/design-handoff/`, follow the accepted decisions in
+   `docs/DESIGN.md`, and record deliberate departures there.
 4. Preserve semantic HTML, keyboard access, visible focus, readable contrast,
    reduced-motion preferences, and useful alternative text.
 5. Keep the site responsive and dependency-light. Do not introduce a framework,

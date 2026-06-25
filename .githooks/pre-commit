@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+# Format, lint, and organize imports on staged files before each commit.
+# Mirrors `biome check` from package.json, scoped to what is being committed.
+# Activated via core.hooksPath (set by the package.json "prepare" script).
+set -e
+
+BIOME="./node_modules/.bin/biome"
+if [ ! -x "$BIOME" ]; then
+	echo "pre-commit: Biome not found at $BIOME — run 'bun install'." >&2
+	exit 1
+fi
+
+# Files staged for commit (Added/Copied/Modified/Renamed).
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged" ] && exit 0
+
+# Apply formatting plus safe lint/assist fixes to the staged files only.
+"$BIOME" check --write --staged --no-errors-on-unmatched --files-ignore-unknown=true
+
+# Re-stage anything Biome rewrote so the commit includes the fixes.
+echo "$staged" | xargs git add --
+
+# Abort the commit if issues remain that need manual attention.
+"$BIOME" check --staged --no-errors-on-unmatched --files-ignore-unknown=true

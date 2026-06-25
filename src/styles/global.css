@@ -1,6 +1,469 @@
-html,
-body {
-	margin: 0;
-	width: 100%;
-	height: 100%;
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..600&display=swap");
+@import "tailwindcss";
+
+/* ============================================================
+   Tailwind theme bridge
+   The design tokens in :root below stay the single source of
+   truth. This `@theme inline` block exposes them to Tailwind as
+   utilities (bg-volt-500, text-ink-900, font-display, rounded-md,
+   shadow-hard, animate-cloud-bob, …) WITHOUT emitting duplicate
+   root variables — utilities resolve straight to the tokens.
+   Spacing utilities (p-5, gap-8, …) already match the 4px grid
+   that --space-* uses, so they are not re-declared here.
+   ============================================================ */
+@theme inline {
+	/* Ink ramp */
+	--color-ink-900: var(--ink-900);
+	--color-ink-800: var(--ink-800);
+	--color-ink-700: var(--ink-700);
+	--color-ink-600: var(--ink-600-solid);
+	--color-ink-500: var(--ink-500-solid);
+	--color-ink-400: var(--ink-400);
+	--color-ink-300: var(--ink-300);
+	--color-ink-200: var(--ink-200);
+	--color-ink-100: var(--ink-100);
+
+	/* Paper ramp */
+	--color-paper-000: var(--paper-000);
+	--color-paper-100: var(--paper-100);
+	--color-paper-200: var(--paper-200);
+	--color-paper-300: var(--paper-300);
+
+	/* Volt accent */
+	--color-volt-500: var(--volt-500);
+	--color-volt-600: var(--volt-600);
+	--color-volt-400: var(--volt-400);
+	--color-volt-200: var(--volt-200);
+
+	/* Semantic roles */
+	--color-surface-page: var(--surface-page);
+	--color-text-muted: var(--text-muted);
+	--color-text-faint: var(--text-faint);
+
+	/* Families */
+	--font-display: var(--font-display);
+	--font-sans: var(--font-sans);
+	--font-mono: var(--font-mono);
+
+	/* Radii */
+	--radius-xs: var(--radius-xs);
+	--radius-sm: var(--radius-sm);
+	--radius-md: var(--radius-md);
+	--radius-lg: var(--radius-lg);
+	--radius-pill: var(--radius-pill);
+
+	/* Hard offset shadows — the signature look */
+	--shadow-hard-sm: var(--shadow-hard-sm);
+	--shadow-hard: var(--shadow-hard);
+	--shadow-hard-lg: var(--shadow-hard-lg);
+
+	/* Animations — clouds bob in lockstep with the hero */
+	--animate-cloud-bob: cloud-bob 5s ease-in-out infinite;
+	--animate-cloud-bob-flip: cloud-bob-flip 5s ease-in-out infinite;
+	--animate-marquee: marquee 26s linear infinite;
+}
+
+/* Canonical cloud motion — hero and both cameos share this bob so
+   their vertical motion and timing align exactly. The -flip variant
+   keeps the About cameo's horizontal mirror while matching the bob. */
+@keyframes cloud-bob {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+
+	50% {
+		transform: translateY(-20px);
+	}
+}
+
+@keyframes cloud-bob-flip {
+	0%,
+	100% {
+		transform: scaleX(-1) translateY(0);
+	}
+
+	50% {
+		transform: scaleX(-1) translateY(-20px);
+	}
+}
+
+@keyframes marquee {
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+/* ============================================================
+   Sam Young — design-system tokens
+   This file mirrors the canonical token sheet from the Claude
+   design handoff (see docs/DESIGN.md). Components compose these
+   tokens and must not start a parallel palette or type system.
+   Cobalt and Flush are defined for completeness but stay off in
+   the default UI, which uses only the Volt accent.
+   ============================================================ */
+
+:root {
+	/* Ink ramp (near-black to warm grays) */
+	--ink-900: #0e0e0c;
+	--ink-800: #1d1e18;
+	--ink-700: #34352c;
+	--ink-600: #52534768;
+	--ink-600-solid: #525347;
+	--ink-500: #6f70627f;
+	--ink-500-solid: #6f7062;
+	--ink-400: #9a9b8c;
+	--ink-300: #c3c4b6;
+	--ink-200: #deded2;
+	--ink-100: #edede3;
+
+	/* Paper ramp (warm creams) */
+	--paper-000: #ffffff;
+	--paper-100: #fbf8f1;
+	--paper-200: #f4f1e8;
+	--paper-300: #e8e4d8;
+
+	/* Accent: Volt (primary pop) */
+	--volt-500: #d6ff3f;
+	--volt-600: #c2ee1f;
+	--volt-400: #e4ff79;
+	--volt-200: #f0ffb4;
+
+	/* Accent: Cobalt — defined but off in the default UI */
+	--cobalt-500: #2e4bff;
+	--cobalt-600: #1f37e0;
+	--cobalt-400: #6478ff;
+	--cobalt-100: #dfe3ff;
+
+	/* Accent: Flush — defined but off in the default UI */
+	--flush-500: #ff5c49;
+	--flush-600: #ed4330;
+	--flush-300: #ff9a8c;
+	--flush-100: #ffe2dc;
+
+	/* Semantic status */
+	--ok-500: #1f9d55;
+	--warn-500: #f0a92b;
+	--danger-500: #e23b2e;
+
+	/* Surfaces */
+	--surface-page: var(--paper-100);
+	--surface-card: var(--paper-000);
+	--surface-sunken: var(--paper-200);
+	--surface-ink: var(--ink-900);
+	--surface-volt: var(--volt-500);
+
+	/* Text */
+	--text-strong: var(--ink-900);
+	--text-body: var(--ink-800);
+	--text-muted: var(--ink-500-solid);
+	--text-faint: var(--ink-400);
+	--text-on-ink: var(--paper-100);
+	--text-on-volt: var(--ink-900);
+	--text-link: var(--ink-900);
+
+	/* Lines */
+	--border-ink: var(--ink-900);
+	--border-soft: var(--ink-200);
+	--border-hair: var(--paper-300);
+
+	/* Accent roles */
+	--accent: var(--volt-500);
+	--accent-strong: var(--volt-600);
+
+	/* Selection */
+	--selection-bg: var(--volt-500);
+	--selection-fg: var(--ink-900);
+
+	/* Families */
+	--font-display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+	--font-sans: "Geist", system-ui, -apple-system, sans-serif;
+	--font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+	/* Type scale */
+	--text-3xs: 11px;
+	--text-2xs: 12px;
+	--text-xs: 13px;
+	--text-sm: 14px;
+	--text-base: 16px;
+	--text-md: 18px;
+	--text-lg: 21px;
+	--text-xl: 26px;
+	--text-2xl: 33px;
+	--text-3xl: 44px;
+	--text-4xl: 60px;
+	--text-5xl: 80px;
+	--text-6xl: 108px;
+
+	/* Weights */
+	--weight-regular: 400;
+	--weight-medium: 500;
+	--weight-semibold: 600;
+	--weight-bold: 700;
+	--weight-display: 800;
+
+	/* Line heights */
+	--leading-tight: 0.98;
+	--leading-snug: 1.1;
+	--leading-normal: 1.5;
+	--leading-relaxed: 1.65;
+
+	/* Tracking */
+	--tracking-tight: -0.03em;
+	--tracking-snug: -0.01em;
+	--tracking-normal: 0em;
+	--tracking-wide: 0.04em;
+	--tracking-mono: 0.02em;
+	--tracking-caps: 0.12em;
+
+	/* Semantic type roles */
+	--type-display:
+		var(--weight-display) var(--text-5xl) / var(--leading-tight)
+		var(--font-display);
+	--type-h1:
+		var(--weight-display) var(--text-4xl) / var(--leading-tight)
+		var(--font-display);
+	--type-h2:
+		var(--weight-bold) var(--text-3xl) / var(--leading-snug) var(--font-display);
+	--type-h3:
+		var(--weight-bold) var(--text-2xl) / var(--leading-snug) var(--font-display);
+	--type-h4:
+		var(--weight-semibold) var(--text-xl) / var(--leading-snug) var(--font-sans);
+	--type-body:
+		var(--weight-regular) var(--text-base) / var(--leading-relaxed)
+		var(--font-sans);
+	--type-body-lg:
+		var(--weight-regular) var(--text-md) / var(--leading-relaxed)
+		var(--font-sans);
+	--type-small:
+		var(--weight-regular) var(--text-sm) / var(--leading-normal)
+		var(--font-sans);
+	--type-mono-label: var(--weight-medium) var(--text-2xs) / 1 var(--font-mono);
+	--type-mono-meta:
+		var(--weight-regular) var(--text-xs) / var(--leading-normal)
+		var(--font-mono);
+
+	/* Spacing — 4px base grid */
+	--space-0: 0;
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 20px;
+	--space-6: 24px;
+	--space-8: 32px;
+	--space-10: 40px;
+	--space-12: 48px;
+	--space-16: 64px;
+	--space-20: 80px;
+	--space-24: 96px;
+	--space-32: 128px;
+	--space-40: 160px;
+
+	/* Containers and section rhythm */
+	--container-prose: 64ch;
+	--container-narrow: 720px;
+	--container: 1080px;
+	--container-wide: 1320px;
+	--gutter: clamp(20px, 5vw, 64px);
+	--section-y: clamp(64px, 12vh, 160px);
+
+	/* Radii — mostly sharp and technical */
+	--radius-none: 0px;
+	--radius-xs: 3px;
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+	--radius-pill: 999px;
+
+	/* Border widths */
+	--bw-hair: 1px;
+	--bw: 1.5px;
+	--bw-bold: 2px;
+	--bw-chunky: 3px;
+
+	/* Hard offset shadows — the signature look */
+	--shadow-hard-sm: 2px 2px 0 var(--ink-900);
+	--shadow-hard: 4px 4px 0 var(--ink-900);
+	--shadow-hard-lg: 6px 6px 0 var(--ink-900);
+	--shadow-hard-volt: 4px 4px 0 var(--volt-600);
+
+	/* Soft shadows — for overlays and app surfaces */
+	--shadow-soft-sm: 0 1px 2px rgb(19 20 15 / 8%);
+	--shadow-soft: 0 4px 16px rgb(19 20 15 / 10%);
+	--shadow-soft-lg: 0 18px 48px rgb(19 20 15 / 16%);
+
+	/* Motion — easing */
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+	--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+	--ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+
+	/* Motion — durations */
+	--dur-1: 120ms;
+	--dur-2: 200ms;
+	--dur-3: 320ms;
+	--dur-4: 520ms;
+	--dur-slow: 820ms;
+}
+
+/* Design-system base + component rules live in @layer base so Tailwind
+   utilities (in the utilities layer) can override them when composed. */
+@layer base {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		background: var(--surface-page);
+		color: var(--text-body);
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		min-height: 100%;
+		margin: 0;
+		background: var(--surface-page);
+		font: var(--type-body);
+		font-synthesis-weight: none;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	body::before {
+		position: fixed;
+		z-index: 100;
+		inset: 0;
+		background-image: radial-gradient(
+			rgb(14 14 12 / 42%) 0.55px,
+			transparent 0.55px
+		);
+		background-size: 4px 4px;
+		content: "";
+		opacity: 0.025;
+		pointer-events: none;
+	}
+
+	h1,
+	h2,
+	h3,
+	p {
+		margin: 0;
+	}
+
+	a,
+	button,
+	input,
+	textarea {
+		font: inherit;
+	}
+
+	img,
+	svg {
+		display: block;
+		max-width: 100%;
+	}
+
+	section[id],
+	footer[id] {
+		scroll-margin-top: 64px;
+	}
+
+	::selection {
+		background: var(--selection-bg);
+		color: var(--selection-fg);
+	}
+
+	:focus-visible {
+		outline: 3px solid var(--volt-600);
+		outline-offset: 4px;
+	}
+
+	.skip-link {
+		position: fixed;
+		z-index: 200;
+		top: var(--space-4);
+		left: var(--space-4);
+		padding: 10px 14px;
+		background: var(--ink-900);
+		color: var(--paper-100);
+		font: var(--type-mono-label);
+		text-decoration: none;
+		transform: translateY(-200%);
+		transition: transform var(--dur-2) var(--ease-out);
+	}
+
+	.skip-link:focus {
+		transform: translateY(0);
+	}
+
+	.eyebrow {
+		color: var(--text-muted);
+		font: var(--type-mono-label);
+		letter-spacing: var(--tracking-caps);
+		text-transform: uppercase;
+	}
+
+	.sticker-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		padding: 15px 26px;
+		border: var(--bw-bold) solid var(--ink-900);
+		border-radius: var(--radius-sm);
+		box-shadow: var(--shadow-hard-lg);
+		font: 600 17px / 1 var(--font-sans);
+		letter-spacing: 0.01em;
+		text-decoration: none;
+		transition:
+			transform var(--dur-1) var(--ease-out),
+			box-shadow var(--dur-1) var(--ease-out);
+		user-select: none;
+	}
+
+	.sticker-button--volt {
+		background: var(--volt-500);
+		color: var(--ink-900);
+	}
+
+	.sticker-button--ink {
+		background: var(--ink-900);
+		color: var(--paper-100);
+	}
+
+	a.sticker-button:hover {
+		box-shadow: 8px 8px 0 var(--ink-900);
+		transform: translate(-1px, -1px);
+	}
+
+	a.sticker-button:active {
+		box-shadow: none;
+		transform: translate(6px, 6px);
+	}
+
+	.js [data-reveal] {
+		opacity: 0;
+		transform: translateY(22px);
+	}
+
+	.js [data-reveal].is-visible {
+		opacity: 1;
+		transform: translateY(0);
+		transition: transform var(--dur-4) var(--ease-out);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.js [data-reveal] {
+			opacity: 1;
+			transform: none;
+		}
+
+		.sticker-button,
+		.skip-link {
+			transition: none;
+		}
+	}
 }
