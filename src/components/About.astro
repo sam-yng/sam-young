@@ -22,40 +22,46 @@ import cloud from "../assets/sam-cloud.png";
 			class="mb-10 max-w-[18ch] text-paper-100 tracking-[var(--tracking-tight)] [font:800_clamp(36px,5.5vw,64px)/1.04_var(--font-display)]"
 			data-reveal
 		>
-			I care about the <span class="text-volt-500">seam</span> between craft and code.
+			I build the <span class="text-volt-500">whole</span> thing, front to back.
 		</h2>
 		<div
 			class="grid grid-cols-2 gap-[clamp(24px,4vw,56px)] max-[640px]:grid-cols-1"
 		>
 			<p class="m-0 text-ink-200 [font:var(--type-body-lg)]" data-reveal>
-				I work where design and engineering overlap, turning rough ideas into interfaces that are fast, considered, and a little bit fun.
+				For the last few years I’ve worked across the whole stack, turning rough ideas into products that are fast, reliable, and genuinely useful. Lately that’s meant building internal tools and platforms that quietly cut hours of overhead for the teams using them.
 			</p>
 			<p class="m-0 text-ink-200 [font:var(--type-body-lg)]" data-reveal>
-				I like motion that means something, type that does the heavy lifting, and getting the thing into people’s hands.
+				I like code that ships, systems that don’t fall over, and the kind of problem where the right fix saves someone a recurring headache. Off the clock you’ll find me over-engineering side projects and pretending that counts as rest.
 			</p>
 		</div>
 		<div class="mt-[clamp(32px,5vw,64px)]" data-reveal>
-			<p class="mb-4 text-ink-400 [font:var(--type-mono-meta)]">this site =</p>
+			<p class="mb-4 text-ink-400 [font:var(--type-mono-meta)]">tools of the trade</p>
 			<ul
 				class="m-0 flex flex-wrap gap-[10px] p-0 [list-style:none]"
-				aria-label="Technology used to build this site"
+				aria-label="Technologies I work with"
 			>
-				<li
-					class="rounded-pill border-[1.5px] border-ink-600 px-[13px] py-[7px] text-paper-100 [font:500_var(--text-xs)/1_var(--font-mono)] [letter-spacing:var(--tracking-mono)]"
-				>
-					Astro
-				</li>
-				<li
-					class="rounded-pill border-[1.5px] border-ink-600 px-[13px] py-[7px] text-paper-100 [font:500_var(--text-xs)/1_var(--font-mono)] [letter-spacing:var(--tracking-mono)]"
-				>
-					GSAP
-				</li>
-				<li
-					class="rounded-pill border-[1.5px] border-ink-600 px-[13px] py-[7px] text-paper-100 [font:500_var(--text-xs)/1_var(--font-mono)] [letter-spacing:var(--tracking-mono)]"
-				>
-					Lenis
-				</li>
+				{
+					[
+						"TypeScript",
+						"React",
+						"Next.js",
+						"Remix",
+						"Node",
+						"GraphQL",
+						"Postgres",
+						"Azure",
+						"Git",
+						"Figma",
+					].map((tool) => (
+						<li class="rounded-pill border-[1.5px] border-ink-600 px-[13px] py-[7px] text-paper-100 [font:500_var(--text-xs)/1_var(--font-mono)] [letter-spacing:var(--tracking-mono)]">
+							{tool}
+						</li>
+					))
+				}
 			</ul>
+			<p class="mt-5 text-ink-400 [font:var(--type-mono-meta)]">
+				this site = Astro · GSAP · Lenis
+			</p>
 		</div>
 	</div>
 </section>

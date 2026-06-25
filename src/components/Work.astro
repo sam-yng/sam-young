@@ -2,9 +2,41 @@
 import Marquee from "./Marquee.astro";
 
 const projectSlots = [
-	{ index: "01", glyph: "◳", visual: "bg-volt-500 text-ink-900" },
-	{ index: "02", glyph: "⌗", visual: "bg-ink-900 text-paper-100" },
-	{ index: "03", glyph: "◎", visual: "bg-paper-200 text-ink-900" },
+	{
+		index: "01",
+		glyph: "◳",
+		visual: "bg-volt-500 text-ink-900",
+		role: "Personal",
+		title: "Lumen",
+		blurb:
+			"A private study workspace that turns lectures into a searchable system — local Whisper transcription, hybrid semantic and full-text search across one nested library, and a Claude assistant (your own key, over MCP) that reasons over everything and cites its sources.",
+		tags: ["Next.js", "React 19", "Supabase", "Whisper", "MCP"],
+		live: "https://www.lumenmono.com/",
+		app: "https://app.lumenmono.com/",
+		repo: "https://github.com/sam-yng/lumen",
+	},
+	{
+		index: "02",
+		glyph: "⌗",
+		visual: "bg-ink-900 text-paper-100",
+		role: "Studio",
+		title: "The JARS Crew",
+		blurb:
+			"Marketing site for a four-person product, design, and engineering studio — fast and motion-driven, built to a tight quality bar with typechecks, linting, and tests gating every merge.",
+		tags: ["Vite", "React 19", "Tailwind v4", "Motion"],
+		live: "https://www.thejarscrew.com/",
+		repo: "https://github.com/the-jars-crew/the-jars-crew",
+	},
+	{
+		index: "03",
+		glyph: "◎",
+		visual: "bg-paper-200 text-ink-900",
+		role: "Client work",
+		title: "Video marketplace",
+		blurb:
+			"Helped launch a two-sided platform connecting customers with editors — a low-friction submission system, automated project dispatch, and shared file management across the full stack.",
+		tags: ["Remix", "TypeScript", "SQL"],
+	},
 ];
 ---
 
@@ -25,7 +57,7 @@ const projectSlots = [
 				Things I’ve shipped
 			</h2>
 			<p class="text-[var(--text-muted)] [font:var(--type-mono-meta)]">
-				// project details pending
+				// a few recent builds
 			</p>
 		</div>
 
@@ -45,19 +77,63 @@ const projectSlots = [
 					</div>
 					<div class="flex min-h-[150px] flex-col gap-3 p-4">
 						<div class="flex justify-between text-[var(--text-muted)] [font:var(--type-mono-meta)]">
-							<span>{project.index}</span><span>—</span>
+							<span>{project.index}</span><span>{project.role}</span>
 						</div>
 						<h3 class="tracking-[var(--tracking-snug)] [font:700_var(--text-lg)/1.05_var(--font-display)]">
-							Project slot {project.index}
+							{project.title}
 						</h3>
 						<p class="[font:var(--type-small)]">
-							Verified project details, contribution, and destination will go here.
+							{project.blurb}
 						</p>
-						<span
-							class="mt-auto self-start rounded-pill border border-ink-200 bg-paper-200 px-[10px] py-[6px] text-[var(--text-muted)] uppercase [font:500_var(--text-3xs)/1_var(--font-mono)]"
-						>
-							Content pending
-						</span>
+						<div class="mt-auto flex flex-col gap-3">
+							<ul
+								class="flex flex-wrap gap-[6px] p-0 [list-style:none]"
+								aria-label="Built with"
+							>
+								{project.tags.map((tag) => (
+									<li class="rounded-pill border border-ink-200 bg-paper-200 px-[10px] py-[6px] text-[var(--text-muted)] uppercase [font:500_var(--text-3xs)/1_var(--font-mono)]">
+										{tag}
+									</li>
+								))}
+							</ul>
+							{(project.live || project.app || project.repo) && (
+								<div class="flex flex-wrap gap-4 border-t border-ink-200 pt-3 [font:var(--type-mono-meta)]">
+									{project.live && (
+										<a
+											class="text-ink-900 underline-offset-2 hover:underline"
+											href={project.live}
+											target="_blank"
+											rel="noopener noreferrer"
+											aria-label={`${project.title} — live site`}
+										>
+											Live <span aria-hidden="true">↗</span>
+										</a>
+									)}
+									{project.app && (
+										<a
+											class="text-ink-900 underline-offset-2 hover:underline"
+											href={project.app}
+											target="_blank"
+											rel="noopener noreferrer"
+											aria-label={`${project.title} — launch the app`}
+										>
+											App <span aria-hidden="true">↗</span>
+										</a>
+									)}
+									{project.repo && (
+										<a
+											class="text-ink-900 underline-offset-2 hover:underline"
+											href={project.repo}
+											target="_blank"
+											rel="noopener noreferrer"
+											aria-label={`${project.title} — source code`}
+										>
+											Code <span aria-hidden="true">↗</span>
+										</a>
+									)}
+								</div>
+							)}
+						</div>
 					</div>
 				</article>
 			))}
