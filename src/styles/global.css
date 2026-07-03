@@ -452,7 +452,9 @@
 	.js [data-reveal].is-visible {
 		opacity: 1;
 		transform: translateY(0);
-		transition: transform var(--dur-4) var(--ease-out);
+		transition:
+			transform var(--dur-4) var(--ease-out),
+			opacity var(--dur-4) var(--ease-out);
 	}
 
 	@media (prefers-reduced-motion: reduce) {

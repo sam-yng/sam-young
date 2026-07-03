@@ -33,6 +33,9 @@ To make it a hard merge gate, configure the repository's `main` ruleset to
 require the `Formatting and linting` status check. The workflow publishes that
 check, while the GitHub ruleset controls whether a merge may bypass it.
 
+Launch tasks that live outside the repository (hosting, DNS, form delivery,
+content confirmations) are tracked in [`docs/GO-LIVE.md`](docs/GO-LIVE.md).
+
 Repository conventions and agent guardrails start in [`AGENTS.md`](AGENTS.md).
 The accepted UI and UX direction from the Claude design handoff is documented
 in [`docs/DESIGN.md`](docs/DESIGN.md); the original source artifact is preserved

@@ -11,6 +11,12 @@ const {
 	title = "Sam Young — Software engineer",
 	description = "Sam Young is a software engineer building fast, useful products for the web, front to back.",
 } = Astro.props;
+
+// Canonical and og:url need the production origin. They activate once
+// `site` is set in astro.config.mjs (see docs/GO-LIVE.md).
+const canonical = Astro.site
+	? new URL(Astro.url.pathname, Astro.site).href
+	: undefined;
 ---
 
 <!doctype html>
@@ -23,6 +29,13 @@ const {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="Sam Young" />
+		<meta name="twitter:card" content="summary" />
+		{canonical && <link rel="canonical" href={canonical} />}
+		{canonical && <meta property="og:url" content={canonical} />}
 		<script is:inline>document.documentElement.classList.add("js");</script>
 	</head>
 	<body>
