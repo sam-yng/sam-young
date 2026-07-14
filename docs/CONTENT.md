@@ -26,9 +26,9 @@ have not been verified.
 
 The work grid carries five approved entries: Lumen (personal, with
 live/app/repo links), The JARS Crew (studio, with a live link), h-alter
-(open source — the `@samyng/h-alter` CLI on npm), Young Post (a public,
+(open source — the `@samyng/h-alter` CLI on npm), Rankwire (a public,
 in-progress personal engineering-news reader), and Northward (an in-progress
-ASCII horror roguelite). Young Post and Northward are described from their
+ASCII horror roguelite). Rankwire and Northward are described from their
 checked-in README, implementation, and milestone state reviewed on 14 July
 2026. Northward's repository is private, so its card states that instead of
 linking visitors to a 404.
@@ -39,7 +39,7 @@ The JARS Crew card links only to its live site because
 `the-jars-crew/the-jars-crew` is private as of 14 July 2026.
 Card imagery: Lumen and The JARS Crew use screenshots of their live homepages,
 captured 3 July 2026 — recapture them if those sites change materially;
-h-alter, Young Post, and Northward use code-native typographic tiles. The
+h-alter, Rankwire, and Northward use code-native typographic tiles. The
 footer links to `github.com/sam-yng` as the public profile.
 
 The contact form delivers to `young142001@gmail.com` via FormSubmit (Sam’s
