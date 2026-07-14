@@ -40,11 +40,28 @@ const labelClass =
 
 			<form
 				class="flex flex-col gap-4 rounded-md border-2 border-ink-900 bg-paper-000 p-[clamp(24px,3vw,36px)] shadow-hard-lg"
+				action="https://formsubmit.co/young142001@gmail.com"
+				method="POST"
 				data-reveal
 				data-contact-form
-				novalidate
+				aria-describedby="contact-form-status"
 			>
 				<p class={labelClass}>// start a project</p>
+
+				<input
+					type="hidden"
+					name="_subject"
+					value="New project brief — sam.young site"
+				/>
+				<input type="hidden" name="_template" value="table" />
+				<input
+					class="hidden"
+					type="text"
+					name="_honey"
+					tabindex="-1"
+					autocomplete="off"
+					aria-hidden="true"
+				/>
 
 				<div class="flex flex-col gap-2">
 					<label class={labelClass} for="cf-name">Your name</label>
@@ -84,13 +101,14 @@ const labelClass =
 				</div>
 
 				<button
-					class="sticker-button sticker-button--volt mt-2 w-full hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:8px_8px_0_var(--ink-900)]"
+					class="sticker-button sticker-button--volt mt-2 w-full hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:8px_8px_0_var(--ink-900)] disabled:cursor-wait disabled:opacity-60 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-hard-lg"
 					type="submit"
 				>
 					Send it <span aria-hidden="true">→</span>
 				</button>
 
 				<p
+					id="contact-form-status"
 					class="m-0 text-[var(--text-muted)] [font:var(--type-mono-meta)]"
 					data-form-status
 					role="status"
@@ -100,6 +118,29 @@ const labelClass =
 			</form>
 		</div>
 
+		<dialog
+			class="contact-dialog m-auto w-[min(92vw,440px)] rounded-md border-2 border-ink-900 bg-paper-000 p-[clamp(24px,4vw,36px)] text-ink-900 shadow-hard-lg"
+			data-contact-dialog
+			aria-labelledby="contact-dialog-title"
+		>
+			<p class="eyebrow mb-4">// sent</p>
+			<h3
+				id="contact-dialog-title"
+				class="mb-3 tracking-[var(--tracking-tight)] [font:800_clamp(28px,4vw,38px)/1_var(--font-display)]"
+			>
+				Brief received<span class="text-volt-600">.</span>
+			</h3>
+			<p class="mb-6 [font:var(--type-body)]">
+				Thanks — your message is on its way to my inbox, with the email you
+				left as the reply-to.
+			</p>
+			<form method="dialog">
+				<button class="sticker-button sticker-button--volt w-full" type="submit"
+					>Close</button
+				>
+			</form>
+		</dialog>
+
 		<div
 			class="mt-[clamp(48px,7vw,88px)] flex flex-wrap items-center justify-between gap-4 border-t-[1.5px] border-ink-900 pt-6"
 		>
@@ -107,6 +148,14 @@ const labelClass =
 				class="text-inherit no-underline"
 				href="#top"
 				aria-label="Sam Young, back to top"><Logo size={30} /></a
+			>
+			<a
+				class="text-ink-900 underline-offset-2 hover:underline [font:var(--type-mono-meta)]"
+				href="https://github.com/sam-yng"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="GitHub profile (opens in a new tab)"
+				>GitHub <span aria-hidden="true">↗</span></a
 			>
 			<p class="[font:var(--type-mono-meta)]">© 2026 — built with too much care</p>
 		</div>
@@ -116,8 +165,18 @@ const labelClass =
 <script>
 	const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
 	const status = form?.querySelector<HTMLElement>("[data-form-status]");
+	const submitButton = form?.querySelector<HTMLButtonElement>(
+		'button[type="submit"]',
+	);
+	const dialog = document.querySelector<HTMLDialogElement>(
+		"[data-contact-dialog]",
+	);
 
-	form?.addEventListener("submit", (event) => {
+	// AJAX variant of the form's action; the plain action remains the
+	// no-JavaScript fallback.
+	const endpoint = "https://formsubmit.co/ajax/young142001@gmail.com";
+
+	form?.addEventListener("submit", async (event) => {
 		event.preventDefault();
 
 		if (!form.checkValidity()) {
@@ -125,9 +184,35 @@ const labelClass =
 			return;
 		}
 
-		if (status) {
-			status.textContent =
-				"Thanks — this form isn’t connected to an inbox yet, so nothing was sent. A real destination is coming soon.";
+		if (submitButton) submitButton.disabled = true;
+		form.setAttribute("aria-busy", "true");
+		if (status) status.textContent = "Sending…";
+
+		try {
+			const response = await fetch(endpoint, {
+				method: "POST",
+				headers: { Accept: "application/json" },
+				body: new FormData(form),
+			});
+			if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+			form.reset();
+			if (status) status.textContent = "";
+			dialog?.showModal();
+		} catch {
+			if (status) {
+				status.textContent =
+					"That didn’t send — sorry. Email me directly at young142001@gmail.com.";
+			}
+		} finally {
+			if (submitButton) submitButton.disabled = false;
+			form.removeAttribute("aria-busy");
 		}
 	});
 </script>
+
+<style>
+	.contact-dialog::backdrop {
+		background: rgb(14 14 12 / 55%);
+	}
+</style>

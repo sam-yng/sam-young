@@ -41,9 +41,10 @@ styles) but must not create a parallel palette or type system.
 ## Site map
 
 1. Sticky header with the logo and Work, About, and Contact anchors.
-2. Hero with the design-engineer label, oversized headline, short introduction,
-   work/contact calls to action, and the thought-cloud mascot.
-3. Full-width selected-work marquee followed by a responsive project-card grid.
+2. Hero with the software-engineer label, oversized headline, short
+   introduction, work/contact calls to action, and the thought-cloud mascot.
+3. Full-width decorative marquee looping the hero’s “weird / fast / useful”,
+   followed by a responsive project-card grid.
 4. Inverted About section with a cloud cameo and compact site-stack chips.
 5. Contact footer with a large invitation, a contact form (name, email, and a
    “what are we building?” brief), cloud cameo, logo, and build note.
@@ -53,9 +54,14 @@ styles) but must not create a parallel palette or type system.
 - The header gains translucent paper, blur, and an ink border after 30px of
   scroll.
 - Lenis provides smooth wheel scrolling when reduced motion is not requested.
-- Reveals use Intersection Observer and a 22px rise. Content is visible without
-  JavaScript, and a safety timeout reveals any observed element after 1.6s.
-- The marquee loops in 26 seconds and pauses on hover.
+- Reveals use Intersection Observer and a 22px rise with a matching fade.
+  Content is visible without JavaScript, and a safety timeout reveals any
+  observed element after 1.6s.
+- The marquee loops seamlessly in 32 seconds and pauses on hover. Its copy
+  departs from the handoff’s “Selected work” label: it mixes lightly playful,
+  work-relevant phrases and emoji (“weird ideas 👾”, “fast builds ⚡”, “useful
+  things 🛠️”, and “thoughtful details 💭”) and is `aria-hidden` as pure
+  decoration, since the section heading provides the accessible label.
 - Buttons lift and grow their hard shadow on hover, then press flat on active.
 - Hero, About, and footer cloud instances share one bob (`translateY` 0 → −20px
   over 5s, `ease-in-out`) so their vertical motion and timing align exactly; the
@@ -71,27 +77,40 @@ styles) but must not create a parallel palette or type system.
 - `sam-hero` is not used. Per Sam’s direction, `sam-cloud` is enlarged to occupy
   the hero-image position by itself and remains the only raster site asset.
 - Prototype projects, years, metrics, tools, links, social profiles, and contact
-  details were not accepted as factual portfolio content. The live grid and
-  contact card use explicit placeholders until Sam supplies verified details.
-  The standalone export’s six demo projects and generic tool list are design
-  fixtures, not a content source.
+  details were not accepted as factual portfolio content; the standalone
+  export’s six demo projects and generic tool list are design fixtures, not a
+  content source. The grid now carries verified entries per
+  [`CONTENT.md`](CONTENT.md). Cards for projects with their own site replace
+  the glyph tile with a live-homepage screenshot (16:9, top-cropped, ink border
+  retained); the screenshot is presentational and the card's labelled links
+  provide the destinations. The open-source package card uses a terminal-style
+  tile (ink surface, Volt mono type) showing its real install command; other
+  cards without imagery use code-native glyph tiles. Work in progress carries
+  a visible status marker, and work without any public destination states
+  plainly that there is no public link.
 - Availability and tenure claims are not reproduced. The standalone’s “Open to
   work” header tag and its multi-year duration copy are not accepted until Sam
   confirms them.
-- The prototype’s fake-success contact form is not reproduced. The footer now
-  carries a real, accessible contact form (name, email, build brief) with native
-  validation, but it is intentionally UI-only: on submit it states plainly that
-  the form is not yet connected to an inbox. It must not claim delivery until a
-  real endpoint and approved contact destination exist.
+- The prototype’s fake-success contact form is not reproduced. The footer
+  carries a real, accessible contact form (name, email, build brief) with
+  native validation that delivers to Sam’s approved address via FormSubmit.
+  A native `<dialog>` confirmation — paper card, ink border, hard shadow —
+  opens only after the endpoint accepts the submission; failures state plainly
+  that nothing was sent and give the direct email address.
 - The starter Astro favicon was replaced with a code-native Volt `SY` mark.
 - Styling is authored in Tailwind utilities bridged to the canonical tokens (see
   [`ARCHITECTURE.md`](ARCHITECTURE.md)); the token sheet remains the source of
   truth, so this is an authoring change, not a palette or type-scale change.
 - The Hero and Work sections were narrowed from the 1320px wide container to the
   1080px container to tighten the overall measure and unify section widths; the
-  `--container-wide` token is retained but no longer used by default.
+  `--container-wide` token is retained but no longer used by default. The Hero
+  also uses a tighter vertical rhythm so its content begins closer to the sticky
+  navigation and the marquee arrives sooner.
 - Project cards were made more compact (shorter body, tighter padding, smaller
-  glyph and title) while keeping the 3 → 2 → 1 responsive grid and sticker look.
+  glyph and title) while keeping the 3 → 2 → 1 responsive grid and sticker
+  look. In-progress cards occupy a centered row beneath shipped work at desktop
+  and tablet widths. The section heading is “Selected work” so shipped and
+  in-progress projects can sit together without blurring their status.
 
 ## Verification
 

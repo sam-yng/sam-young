@@ -60,7 +60,7 @@
 	/* Animations — clouds bob in lockstep with the hero */
 	--animate-cloud-bob: cloud-bob 5s ease-in-out infinite;
 	--animate-cloud-bob-flip: cloud-bob-flip 5s ease-in-out infinite;
-	--animate-marquee: marquee 26s linear infinite;
+	--animate-marquee: marquee 32s linear infinite;
 }
 
 /* Canonical cloud motion — hero and both cameos share this bob so
@@ -452,7 +452,9 @@
 	.js [data-reveal].is-visible {
 		opacity: 1;
 		transform: translateY(0);
-		transition: transform var(--dur-4) var(--ease-out);
+		transition:
+			transform var(--dur-4) var(--ease-out),
+			opacity var(--dur-4) var(--ease-out);
 	}
 
 	@media (prefers-reduced-motion: reduce) {

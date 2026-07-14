@@ -29,6 +29,7 @@ bun run preview  # preview the production build
 - [`docs/DESIGN.md`](docs/DESIGN.md) — UI/UX principles and design-handoff status.
 - [`docs/CONTENT.md`](docs/CONTENT.md) — content truth and portfolio claims.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — technical boundaries and decisions.
+- [`docs/GO-LIVE.md`](docs/GO-LIVE.md) — launch tasks that live outside the repo.
 - [`docs/plans/README.md`](docs/plans/README.md) — when and how to keep execution plans.
 
 ## Non-negotiable rules
