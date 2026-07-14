@@ -1,37 +1,88 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import jarsCrewLive from "../assets/jars-crew-live.png";
 import lumenLive from "../assets/lumen-live.png";
 import Marquee from "./Marquee.astro";
 
-const projectSlots = [
+interface ProjectLink {
+	label: string;
+	href: string;
+	ariaLabel: string;
+}
+
+interface ProjectBase {
+	index: string;
+	role: string;
+	status?: string;
+	title: string;
+	blurb: string;
+	tags: string[];
+	links: ProjectLink[];
+	note?: string;
+}
+
+type Project = ProjectBase &
+	(
+		| {
+				screenshot: ImageMetadata;
+				screenshotAlt: string;
+				glyph?: never;
+				visual?: never;
+				command?: never;
+		  }
+		| {
+				screenshot?: never;
+				screenshotAlt?: never;
+				glyph: string;
+				visual: string;
+				command?: string;
+		  }
+	);
+
+const projectSlots: Project[] = [
 	{
 		index: "01",
-		glyph: "◳",
-		visual: "bg-volt-500 text-ink-900",
 		role: "Personal",
 		title: "Lumen",
 		blurb:
-			"A private study workspace that turns lectures into a searchable system — local Whisper transcription, hybrid semantic and full-text search, and a source-citing Claude assistant over MCP.",
+			"A study workspace that turns lectures into searchable notes — local transcription, hybrid search, and a source-citing assistant.",
 		tags: ["Next.js", "React 19", "Supabase", "Whisper", "MCP"],
-		live: "https://www.lumenmono.com/",
-		app: "https://app.lumenmono.com/",
-		repo: "https://github.com/sam-yng/lumen",
+		links: [
+			{
+				label: "Live",
+				href: "https://www.lumenmono.com/",
+				ariaLabel: "Lumen — live site (opens in a new tab)",
+			},
+			{
+				label: "App",
+				href: "https://app.lumenmono.com/",
+				ariaLabel: "Lumen — launch the app (opens in a new tab)",
+			},
+			{
+				label: "Code",
+				href: "https://github.com/sam-yng/lumen",
+				ariaLabel: "Lumen — source code (opens in a new tab)",
+			},
+		],
 		screenshot: lumenLive,
 		screenshotAlt:
 			"The Lumen landing page: the headline “Turn lectures into a searchable study system” above a preview of the app’s library, notes, and live transcript.",
 	},
 	{
 		index: "02",
-		glyph: "⌗",
-		visual: "bg-ink-900 text-paper-100",
 		role: "Studio",
 		title: "The JARS Crew",
 		blurb:
-			"Marketing site for a four-person product, design, and engineering studio — fast and motion-driven, built to a tight quality bar with typechecks, linting, and tests gating every merge.",
+			"A motion-led marketing site for a four-person product studio, with typechecking, linting, and tests guarding every merge.",
 		tags: ["Vite", "React 19", "Tailwind v4", "Motion"],
-		live: "https://www.thejarscrew.com/",
-		repo: "https://github.com/the-jars-crew/the-jars-crew",
+		links: [
+			{
+				label: "Live",
+				href: "https://www.thejarscrew.com/",
+				ariaLabel: "The JARS Crew — live site (opens in a new tab)",
+			},
+		],
 		screenshot: jarsCrewLive,
 		screenshotAlt:
 			"The JARS Crew landing page: the headline “We build things — from idea to shipped product” in serif type on a near-black background.",
@@ -44,9 +95,46 @@ const projectSlots = [
 		role: "Open source",
 		title: "h-alter",
 		blurb:
-			"An npm CLI that installs an agent harness into an existing repo — the docs, hooks, skills, and guardrails that keep coding agents honest — right-sized to the package manager, layout, and tooling it detects.",
+			"A CLI that fits an agent harness — docs, hooks, skills, and guardrails — to an existing repository and its tooling.",
 		tags: ["TypeScript", "Node", "CLI"],
-		npm: "https://www.npmjs.com/package/@samyng/h-alter",
+		links: [
+			{
+				label: "npm",
+				href: "https://www.npmjs.com/package/@samyng/h-alter",
+				ariaLabel: "h-alter — on npm (opens in a new tab)",
+			},
+		],
+	},
+	{
+		index: "04",
+		glyph: "Y/P",
+		visual: "bg-paper-200 text-ink-900",
+		role: "Personal",
+		status: "In progress",
+		title: "Young Post",
+		blurb:
+			"A personal engineering-news reader with Google sign-in and scheduled RSS/Atom ingestion, being built toward per-user ranking from voting.",
+		tags: ["Next.js", "TypeScript", "Prisma", "Postgres"],
+		links: [
+			{
+				label: "Code",
+				href: "https://github.com/sam-yng/young-post",
+				ariaLabel: "Young Post — source code (opens in a new tab)",
+			},
+		],
+	},
+	{
+		index: "05",
+		glyph: "N↑",
+		visual: "bg-ink-900 text-volt-500",
+		role: "Game",
+		status: "In progress",
+		title: "Northward",
+		blurb:
+			"A browser-hosted ASCII horror roguelite with a deterministic Python engine, a Preact terminal client, and WebSocket play — still being readied for release.",
+		tags: ["Python", "Preact", "FastAPI", "WebSocket"],
+		links: [],
+		note: "Private repository while in development.",
 	},
 ];
 ---
@@ -65,10 +153,10 @@ const projectSlots = [
 				id="work-title"
 				class="tracking-[var(--tracking-tight)] [font:800_clamp(38px,5vw,60px)/1_var(--font-display)]"
 			>
-				Things I’ve shipped
+				Selected work
 			</h2>
 			<p class="text-[var(--text-muted)] [font:var(--type-mono-meta)]">
-				// a few recent builds
+				// shipped + in progress
 			</p>
 		</div>
 
@@ -81,22 +169,17 @@ const projectSlots = [
 					data-reveal
 				>
 					{project.screenshot ? (
-						<a
-							class="block border-b-2 border-ink-900"
-							href={project.live}
-							target="_blank"
-							rel="noopener noreferrer"
-							tabindex="-1"
-							aria-label={`${project.title} — live site`}
-						>
+						<div class="border-b-2 border-ink-900">
 							<Image
 								class="aspect-video h-auto w-full object-cover object-top"
 								src={project.screenshot}
 								alt={project.screenshotAlt}
 								widths={[480, 800, 1600]}
 								sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 340px"
+								loading="lazy"
+								decoding="async"
 							/>
-						</a>
+						</div>
 					) : (
 						<div
 							class={`grid aspect-video place-items-center border-b-2 border-ink-900 ${project.visual}`}
@@ -115,8 +198,16 @@ const projectSlots = [
 						</div>
 					)}
 					<div class="flex min-h-[150px] flex-1 flex-col gap-3 p-4">
-						<div class="flex justify-between text-[var(--text-muted)] [font:var(--type-mono-meta)]">
-							<span>{project.index}</span><span>{project.role}</span>
+						<div class="flex items-center justify-between gap-3 text-[var(--text-muted)] [font:var(--type-mono-meta)]">
+							<span>{project.index}</span>
+							<div class="flex flex-wrap items-center justify-end gap-2">
+								<span>{project.role}</span>
+								{project.status && (
+									<span class="rounded-pill border border-ink-900 bg-volt-500 px-2 py-1 text-ink-900 uppercase [font:600_var(--text-3xs)/1_var(--font-mono)]">
+										{project.status}
+									</span>
+								)}
+							</div>
 						</div>
 						<h3 class="tracking-[var(--tracking-snug)] [font:700_var(--text-lg)/1.05_var(--font-display)]">
 							{project.title}
@@ -127,7 +218,7 @@ const projectSlots = [
 						<div class="mt-auto flex flex-col gap-3">
 							<ul
 								class="flex flex-wrap gap-[6px] p-0 [list-style:none]"
-								aria-label="Built with"
+								aria-label={`Built with: ${project.tags.join(", ")}`}
 							>
 								{project.tags.map((tag) => (
 									<li class="rounded-pill border border-ink-200 bg-paper-200 px-[10px] py-[6px] text-[var(--text-muted)] uppercase [font:500_var(--text-3xs)/1_var(--font-mono)]">
@@ -135,52 +226,24 @@ const projectSlots = [
 									</li>
 								))}
 							</ul>
-							{(project.live || project.app || project.repo || project.npm) && (
+							{project.note && (
+								<p class="text-[var(--text-muted)] [font:var(--type-mono-meta)]">
+									// {project.note}
+								</p>
+							)}
+							{project.links.length > 0 && (
 								<div class="flex flex-wrap gap-4 border-t border-ink-200 pt-3 [font:var(--type-mono-meta)]">
-									{project.live && (
+									{project.links.map((link) => (
 										<a
 											class="text-ink-900 underline-offset-2 hover:underline"
-											href={project.live}
+											href={link.href}
 											target="_blank"
 											rel="noopener noreferrer"
-											aria-label={`${project.title} — live site`}
+											aria-label={link.ariaLabel}
 										>
-											Live <span aria-hidden="true">↗</span>
+											{link.label} <span aria-hidden="true">↗</span>
 										</a>
-									)}
-									{project.app && (
-										<a
-											class="text-ink-900 underline-offset-2 hover:underline"
-											href={project.app}
-											target="_blank"
-											rel="noopener noreferrer"
-											aria-label={`${project.title} — launch the app`}
-										>
-											App <span aria-hidden="true">↗</span>
-										</a>
-									)}
-									{project.npm && (
-										<a
-											class="text-ink-900 underline-offset-2 hover:underline"
-											href={project.npm}
-											target="_blank"
-											rel="noopener noreferrer"
-											aria-label={`${project.title} — on npm`}
-										>
-											npm <span aria-hidden="true">↗</span>
-										</a>
-									)}
-									{project.repo && (
-										<a
-											class="text-ink-900 underline-offset-2 hover:underline"
-											href={project.repo}
-											target="_blank"
-											rel="noopener noreferrer"
-											aria-label={`${project.title} — source code`}
-										>
-											Code <span aria-hidden="true">↗</span>
-										</a>
-									)}
+									))}
 								</div>
 							)}
 						</div>

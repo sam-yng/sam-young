@@ -44,6 +44,7 @@ const labelClass =
 				method="POST"
 				data-reveal
 				data-contact-form
+				aria-describedby="contact-form-status"
 			>
 				<p class={labelClass}>// start a project</p>
 
@@ -100,13 +101,14 @@ const labelClass =
 				</div>
 
 				<button
-					class="sticker-button sticker-button--volt mt-2 w-full hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:8px_8px_0_var(--ink-900)]"
+					class="sticker-button sticker-button--volt mt-2 w-full hover:-translate-x-px hover:-translate-y-px hover:[box-shadow:8px_8px_0_var(--ink-900)] disabled:cursor-wait disabled:opacity-60 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-hard-lg"
 					type="submit"
 				>
 					Send it <span aria-hidden="true">→</span>
 				</button>
 
 				<p
+					id="contact-form-status"
 					class="m-0 text-[var(--text-muted)] [font:var(--type-mono-meta)]"
 					data-form-status
 					role="status"
@@ -152,6 +154,7 @@ const labelClass =
 				href="https://github.com/sam-yng"
 				target="_blank"
 				rel="noopener noreferrer"
+				aria-label="GitHub profile (opens in a new tab)"
 				>GitHub <span aria-hidden="true">↗</span></a
 			>
 			<p class="[font:var(--type-mono-meta)]">© 2026 — built with too much care</p>
@@ -182,6 +185,7 @@ const labelClass =
 		}
 
 		if (submitButton) submitButton.disabled = true;
+		form.setAttribute("aria-busy", "true");
 		if (status) status.textContent = "Sending…";
 
 		try {
@@ -202,6 +206,7 @@ const labelClass =
 			}
 		} finally {
 			if (submitButton) submitButton.disabled = false;
+			form.removeAttribute("aria-busy");
 		}
 	});
 </script>
