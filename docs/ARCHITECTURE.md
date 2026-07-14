@@ -19,8 +19,10 @@ classes (`.sticker-button`, `.eyebrow`, the reveal states) sit in `@layer base`
 so utilities can compose over them; a few JS-toggled or child-targeting rules
 (the scrolled header, the logo wordmark) stay in scoped component `<style>`.
 
-The only raster site asset is `src/assets/sam-cloud.png`. Astro owns imported
-asset URLs and dimensions. The type-set logo and SVG favicon are code-native.
+Raster site assets live in `src/assets/`: the cloud mascot plus one
+live-homepage screenshot per public project card, rendered responsively through
+`astro:assets` `<Image>`. Astro owns imported asset URLs and dimensions. The
+type-set logo and SVG favicon are code-native.
 
 The page ships ordinary semantic HTML by default. Small bundled scripts add the
 sticky-header state, Intersection Observer reveals, and Lenis smooth scrolling.
@@ -32,9 +34,13 @@ Lenis is active only when the visitor has not requested reduced motion. GSAP is
 installed because it is part of the accepted motion stack and may support later
 section-specific sequences, but the initial scaffold does not require it.
 
-The design handoff’s fonts currently load from Google Fonts. This is the only
-runtime third-party asset request; replace it with self-hosted `@font-face` files
-if privacy, performance, or licensing requirements change.
+The design handoff’s fonts currently load from Google Fonts; replace them with
+self-hosted `@font-face` files if privacy, performance, or licensing
+requirements change. The only other runtime third-party dependency is
+FormSubmit (`formsubmit.co`), which delivers contact-form submissions to Sam’s
+inbox: the form element posts to it directly as a no-JavaScript fallback, and a
+small script upgrades that to an AJAX submission with an in-page confirmation
+dialog. No form data is stored in this codebase or its host.
 
 Tailwind (v4, via the `@tailwindcss/vite` plugin wired in `astro.config.mjs`) is
 a build-time dependency only — it adds no runtime payload beyond the generated,
@@ -60,7 +66,9 @@ setting by itself.
 - Hydrate only interactive islands that need browser JavaScript.
 - Keep content close to the repository while the site remains small. Introduce
   a CMS only when editing needs justify its operational cost.
-- Do not add a contact-form success state until a real delivery endpoint exists.
+- Keep contact-form feedback truthful to the network result: confirm delivery
+  only after the endpoint accepts the submission, and give a direct email
+  address on failure.
 - Add dependencies for a demonstrated capability, not anticipated complexity.
 - Preserve fast loading, semantic markup, and straightforward local setup.
 
