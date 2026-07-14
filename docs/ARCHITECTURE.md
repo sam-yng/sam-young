@@ -30,17 +30,20 @@ No component framework or client-side state layer is required.
 
 ## Dependencies and gates
 
-Lenis is active only when the visitor has not requested reduced motion. GSAP is
-installed because it is part of the accepted motion stack and may support later
-section-specific sequences, but the initial scaffold does not require it.
+Lenis is active only when the visitor has not requested reduced motion. The
+current motion layer uses CSS for decorative animation and Lenis for smooth
+scrolling. GSAP was removed because the production site did not import it.
+
+`@samyng/h-alter` is development-only harness tooling. It supports repository
+maintenance but is not imported by the Astro site or shipped to visitors.
 
 The design handoff’s fonts currently load from Google Fonts; replace them with
 self-hosted `@font-face` files if privacy, performance, or licensing
-requirements change. The only other runtime third-party dependency is
-FormSubmit (`formsubmit.co`), which delivers contact-form submissions to Sam’s
-inbox: the form element posts to it directly as a no-JavaScript fallback, and a
-small script upgrades that to an AJAX submission with an in-page confirmation
-dialog. No form data is stored in this codebase or its host.
+requirements change. The only remote runtime service is FormSubmit
+(`formsubmit.co`), which delivers contact-form submissions to Sam’s inbox: the
+form element posts to it directly as a no-JavaScript fallback, and a small
+script upgrades that to an AJAX submission with an in-page confirmation dialog.
+No form data is stored in this codebase or its host.
 
 Tailwind (v4, via the `@tailwindcss/vite` plugin wired in `astro.config.mjs`) is
 a build-time dependency only — it adds no runtime payload beyond the generated,

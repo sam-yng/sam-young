@@ -30,6 +30,12 @@ delete this file once the launch is verified.
   - [ ] decide whether `sam-yng/h-alter` stays private — the card links only
         to npm today. *(then in repo: add a Code link to the h-alter card if
         the repo goes public.)*
+  - [ ] decide whether `the-jars-crew/the-jars-crew` stays private — the card
+        links only to the live site. *(then in repo: add a Code link if the
+        repository goes public.)*
+  - [ ] decide whether `sam-yng/northward` stays private — the card names the
+        private repository but does not link to it. *(then in repo: add a Code
+        link if the repository goes public.)*
 
 ## Strongly recommended before launch
 

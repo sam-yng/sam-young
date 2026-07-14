@@ -80,11 +80,13 @@ styles) but must not create a parallel palette or type system.
   export’s six demo projects and generic tool list are design fixtures, not a
   content source. The grid now carries verified entries per
   [`CONTENT.md`](CONTENT.md). Cards for projects with their own site replace
-  the glyph tile with a linked live-homepage screenshot (16:9, top-cropped,
-  ink border retained); the open-source package card uses a terminal-style
-  tile (ink surface, Volt mono type) showing its real install command; work
-  without any public destination keeps the glyph tile and states plainly that
-  there is no public link.
+  the glyph tile with a live-homepage screenshot (16:9, top-cropped, ink border
+  retained); the screenshot is presentational and the card's labelled links
+  provide the destinations. The open-source package card uses a terminal-style
+  tile (ink surface, Volt mono type) showing its real install command; other
+  cards without imagery use code-native glyph tiles. Work in progress carries
+  a visible status marker, and work without any public destination states
+  plainly that there is no public link.
 - Availability and tenure claims are not reproduced. The standalone’s “Open to
   work” header tag and its multi-year duration copy are not accepted until Sam
   confirms them.
@@ -102,7 +104,9 @@ styles) but must not create a parallel palette or type system.
   1080px container to tighten the overall measure and unify section widths; the
   `--container-wide` token is retained but no longer used by default.
 - Project cards were made more compact (shorter body, tighter padding, smaller
-  glyph and title) while keeping the 3 → 2 → 1 responsive grid and sticker look.
+  glyph and title) while keeping the 3 → 2 → 1 responsive grid and sticker
+  look. The section heading is “Selected work” so shipped and in-progress
+  projects can sit together without blurring their status.
 
 ## Verification
 
