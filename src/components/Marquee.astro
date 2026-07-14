@@ -1,7 +1,12 @@
 ---
-// Decorative divider strip — the hero's three adjectives on loop. Hidden
-// from assistive tech; the "Selected work" heading labels the section.
-const words = ["weird", "fast", "useful", "weird", "fast", "useful"];
+// Decorative divider strip. Two identical groups make the loop seamless;
+// the section heading provides the accessible label.
+const items = [
+	{ word: "weird ideas", emoji: "👾" },
+	{ word: "fast builds", emoji: "⚡" },
+	{ word: "useful things", emoji: "🛠️" },
+	{ word: "thoughtful details", emoji: "💭" },
+];
 ---
 
 <div
@@ -9,16 +14,21 @@ const words = ["weird", "fast", "useful", "weird", "fast", "useful"];
 	aria-hidden="true"
 >
 	<div
-		class="flex w-max animate-marquee motion-reduce:animate-none group-hover:[animation-play-state:paused]"
+		class="flex w-max animate-marquee will-change-transform motion-reduce:animate-none motion-reduce:transform-none group-hover:[animation-play-state:paused]"
 	>
 		{
 			[0, 1].map(() => (
-				<div class="flex flex-shrink-0 items-center gap-8 whitespace-nowrap py-3 px-4 [font:600_18px/1_var(--font-display)]">
-					{words.map((word) => (
-						<>
-							<span class:list={[word === "weird" && "italic"]}>{word}</span>
-							<span class="text-[var(--text-xs)] text-volt-500">✦</span>
-						</>
+				<div class="flex flex-shrink-0 items-center gap-[clamp(24px,4vw,56px)] whitespace-nowrap py-3 px-[clamp(12px,2vw,28px)] [font:600_clamp(16px,2vw,19px)/1_var(--font-display)]">
+					{items.map(({ word, emoji }) => (
+						<span class="inline-flex items-center gap-2">
+							<span class:list={[word.startsWith("weird") && "italic"]}>{word}</span>
+							<span class="text-[0.9em]">
+								{emoji}
+							</span>
+							<span class="ml-[clamp(16px,2.5vw,36px)] text-[var(--text-xs)] text-volt-500">
+								✦
+							</span>
+						</span>
 					))}
 				</div>
 			))

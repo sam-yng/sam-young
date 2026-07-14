@@ -161,11 +161,11 @@ const projectSlots: Project[] = [
 		</div>
 
 		<div
-			class="grid grid-cols-3 gap-[clamp(14px,1.5vw,20px)] max-[900px]:grid-cols-2 max-[600px]:grid-cols-1"
+			class="project-grid grid grid-cols-6 gap-[clamp(14px,1.5vw,20px)] max-[900px]:grid-cols-4 max-[600px]:grid-cols-1"
 		>
 			{projectSlots.map((project) => (
 				<article
-					class="flex flex-col overflow-hidden rounded-md border-2 border-ink-900 bg-paper-000 shadow-hard"
+					class="project-card col-span-2 flex flex-col overflow-hidden rounded-md border-2 border-ink-900 bg-paper-000 shadow-hard max-[600px]:col-span-1"
 					data-reveal
 				>
 					{project.screenshot ? (
@@ -253,3 +253,22 @@ const projectSlots: Project[] = [
 		</div>
 	</div>
 </section>
+
+<style>
+	/* Keep each status group visually distinct without changing card width. */
+	@media (min-width: 901px) {
+		.project-card:nth-child(4) {
+			grid-column-start: 2;
+		}
+	}
+
+	@media (min-width: 601px) and (max-width: 900px) {
+		.project-card:nth-child(3) {
+			grid-column-start: 2;
+		}
+
+		.project-card:nth-child(4) {
+			grid-column-start: 1;
+		}
+	}
+</style>

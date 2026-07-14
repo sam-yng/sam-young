@@ -57,10 +57,11 @@ styles) but must not create a parallel palette or type system.
 - Reveals use Intersection Observer and a 22px rise with a matching fade.
   Content is visible without JavaScript, and a safety timeout reveals any
   observed element after 1.6s.
-- The marquee loops in 26 seconds and pauses on hover. Its copy departs from
-  the handoff’s “Selected work” label: it loops the hero’s three adjectives
-  (“weird ✦ fast ✦ useful”) and is `aria-hidden` as pure decoration, since the
-  section heading provides the accessible label.
+- The marquee loops seamlessly in 32 seconds and pauses on hover. Its copy
+  departs from the handoff’s “Selected work” label: it mixes lightly playful,
+  work-relevant phrases and emoji (“weird ideas 👾”, “fast builds ⚡”, “useful
+  things 🛠️”, and “thoughtful details 💭”) and is `aria-hidden` as pure
+  decoration, since the section heading provides the accessible label.
 - Buttons lift and grow their hard shadow on hover, then press flat on active.
 - Hero, About, and footer cloud instances share one bob (`translateY` 0 → −20px
   over 5s, `ease-in-out`) so their vertical motion and timing align exactly; the
@@ -102,11 +103,14 @@ styles) but must not create a parallel palette or type system.
   truth, so this is an authoring change, not a palette or type-scale change.
 - The Hero and Work sections were narrowed from the 1320px wide container to the
   1080px container to tighten the overall measure and unify section widths; the
-  `--container-wide` token is retained but no longer used by default.
+  `--container-wide` token is retained but no longer used by default. The Hero
+  also uses a tighter vertical rhythm so its content begins closer to the sticky
+  navigation and the marquee arrives sooner.
 - Project cards were made more compact (shorter body, tighter padding, smaller
   glyph and title) while keeping the 3 → 2 → 1 responsive grid and sticker
-  look. The section heading is “Selected work” so shipped and in-progress
-  projects can sit together without blurring their status.
+  look. In-progress cards occupy a centered row beneath shipped work at desktop
+  and tablet widths. The section heading is “Selected work” so shipped and
+  in-progress projects can sit together without blurring their status.
 
 ## Verification
 
