@@ -26,21 +26,23 @@ have not been verified.
 
 The work grid carries five approved entries: Lumen (personal, with
 live/app/repo links), The JARS Crew (studio, with a live link), h-alter
-(open source — the `@samyng/h-alter` CLI on npm), Rankwire (a public,
-in-progress personal engineering-news reader), and Northward (an in-progress
-ASCII horror roguelite). Rankwire and Northward are described from their
-checked-in README, implementation, and milestone state reviewed on 14 July
-2026. Northward's repository is private, so its card states that instead of
-linking visitors to a 404.
+(open source — the `@samyng/h-alter` CLI on npm), Rankwire (a public personal
+engineering-news reader, live at `rankwire.com.au`), and Northward (an
+in-progress ASCII horror roguelite). Rankwire's public site, source, and
+published metadata were reviewed on 16 July 2026. Northward is described from
+its checked-in README, implementation, and milestone state reviewed on 14 July
+2026; its repository is private, so its card states that instead of linking
+visitors to a 404.
 
 The h-alter card links only to npm because the `sam-yng/h-alter` GitHub
 repository is private as of 3 July 2026; add a Code link if it goes public.
 The JARS Crew card links only to its live site because
 `the-jars-crew/the-jars-crew` is private as of 14 July 2026.
 Card imagery: Lumen and The JARS Crew use screenshots of their live homepages,
-captured 3 July 2026 — recapture them if those sites change materially;
-h-alter, Rankwire, and Northward use code-native typographic tiles. The
-footer links to `github.com/sam-yng` as the public profile.
+captured 3 July 2026; Rankwire uses its public site image, captured 16 July
+2026. Recapture these assets if the respective sites change materially.
+h-alter and Northward use code-native typographic tiles. The footer links to
+`github.com/sam-yng` as the public profile.
 
 The contact form delivers to `young142001@gmail.com` via FormSubmit (Sam’s
 direction, 3 July 2026); that address appears in the page source as the form
