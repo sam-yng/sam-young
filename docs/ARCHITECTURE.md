@@ -19,8 +19,8 @@ classes (`.sticker-button`, `.eyebrow`, the reveal states) sit in `@layer base`
 so utilities can compose over them; a few JS-toggled or child-targeting rules
 (the scrolled header, the logo wordmark) stay in scoped component `<style>`.
 
-Raster site assets live in `src/assets/`: the cloud mascot plus one
-live-homepage screenshot per public project card, rendered responsively through
+Raster site assets live in `src/assets/`: the cloud mascot plus one current
+public site image per public project card, rendered responsively through
 `astro:assets` `<Image>`. Astro owns imported asset URLs and dimensions. The
 type-set logo and SVG favicon are code-native.
 

@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import jarsCrewLive from "../assets/jars-crew-live.png";
 import lumenLive from "../assets/lumen-live.png";
+import rankwireLive from "../assets/rankwire-live.jpg";
 import Marquee from "./Marquee.astro";
 
 interface ProjectLink {
@@ -107,21 +108,25 @@ const projectSlots: Project[] = [
 	},
 	{
 		index: "04",
-		glyph: "R/W",
-		visual: "bg-paper-200 text-ink-900",
 		role: "Personal",
-		status: "In progress",
 		title: "Rankwire",
-		blurb:
-			"A personal engineering-news reader with Google sign-in and scheduled RSS/Atom ingestion, being built toward per-user ranking from voting.",
+		blurb: "A personalised engineering-news feed that learns from every vote.",
 		tags: ["Next.js", "TypeScript", "Prisma", "Postgres"],
 		links: [
+			{
+				label: "Live",
+				href: "https://rankwire.com.au/",
+				ariaLabel: "Rankwire — live site (opens in a new tab)",
+			},
 			{
 				label: "Code",
 				href: "https://github.com/sam-yng/rankwire",
 				ariaLabel: "Rankwire — source code (opens in a new tab)",
 			},
 		],
+		screenshot: rankwireLive,
+		screenshotAlt:
+			"The Rankwire landing page in dark monochrome: a personal engineering dispatch with a Google sign-in button.",
 	},
 	{
 		index: "05",
@@ -257,18 +262,14 @@ const projectSlots: Project[] = [
 <style>
 	/* Keep each status group visually distinct without changing card width. */
 	@media (min-width: 901px) {
-		.project-card:nth-child(4) {
-			grid-column-start: 2;
+		.project-card:nth-child(5) {
+			grid-column-start: 3;
 		}
 	}
 
 	@media (min-width: 601px) and (max-width: 900px) {
-		.project-card:nth-child(3) {
+		.project-card:nth-child(5) {
 			grid-column-start: 2;
-		}
-
-		.project-card:nth-child(4) {
-			grid-column-start: 1;
 		}
 	}
 </style>

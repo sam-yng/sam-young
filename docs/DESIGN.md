@@ -81,8 +81,8 @@ styles) but must not create a parallel palette or type system.
   export’s six demo projects and generic tool list are design fixtures, not a
   content source. The grid now carries verified entries per
   [`CONTENT.md`](CONTENT.md). Cards for projects with their own site replace
-  the glyph tile with a live-homepage screenshot (16:9, top-cropped, ink border
-  retained); the screenshot is presentational and the card's labelled links
+  the glyph tile with a current public visual from that site (16:9, top-cropped,
+  ink border retained); it is presentational and the card's labelled links
   provide the destinations. The open-source package card uses a terminal-style
   tile (ink surface, Volt mono type) showing its real install command; other
   cards without imagery use code-native glyph tiles. Work in progress carries
