@@ -2,57 +2,289 @@
 import cloud from "../assets/sam-cloud.png";
 ---
 
-<section
-	class="mx-auto max-w-[var(--container)] m-0 px-[var(--gutter)] py-[clamp(28px,7vw,72px)]"
-	id="top"
-	aria-labelledby="hero-title"
->
-	<p class="eyebrow mb-6" data-reveal>// software engineer · sydney</p>
+<section class="hero" id="top" aria-labelledby="hero-title" data-hero-word-section>
+	<p class="eyebrow hero__eyebrow" data-reveal>// software engineer · sydney</p>
 
-	<div
-		class="grid grid-cols-1 items-center gap-[clamp(8px,3vw,48px)] min-[760px]:grid-cols-[minmax(0,1.08fr)_minmax(300px,0.92fr)] py-auto h-full"
-	>
-		<h1
-			id="hero-title"
-			class="m-0 text-balance font-display text-[clamp(54px,8vw,112px)] font-extrabold leading-[0.92] tracking-[var(--tracking-tight)] max-[760px]:text-[clamp(50px,15vw,78px)]"
-			data-reveal
-		>
-			Building<br />
-			<em class="italic">weird</em>, fast<br />
-			things for<br />
-			the web<span class="text-volt-600">.</span>
-		</h1>
-
-		<div
-			class="flex min-h-[clamp(280px,30vw,430px)] items-center justify-center max-[760px]:mx-auto max-[760px]:mt-6 max-[760px]:min-h-0 max-[760px]:w-[min(80vw,400px)]"
-			data-reveal
-		>
-			<img
-				class="h-auto w-[min(100%,300px)] animate-cloud-bob drop-shadow-[0_18px_22px_rgba(14,14,12,0.1)] will-change-transform motion-reduce:animate-none"
-				src={cloud.src}
-				width={cloud.width}
-				height={cloud.height}
-				alt="A deadpan, bright green thought cloud"
-				fetchpriority="high"
-			/>
-		</div>
-	</div>
-
-	<div
-		class="mt-[clamp(20px,2.5vw,36px)] flex flex-wrap items-start gap-[clamp(24px,4vw,56px)] max-[760px]:mt-7"
+	<h1
+		id="hero-title"
+		class="hero-title"
+		aria-label="Building weird, fast, and useful things for the web."
 		data-reveal
 	>
-		<p class="m-0 max-w-[46ch] [font:var(--type-body-lg)]">
-			I’m <strong class="text-ink-900">Sam Young</strong> — a software engineer
-			building fast, useful products for the web, front to back.
+		<span class="hero-title__visual" aria-hidden="true">
+			<span class="hero-title__line">Building</span>
+			<span class="hero-title__line hero-title__word-line">
+				<span class="hero-word-slot">
+					<span class="hero-word-track" data-hero-word-track>
+						<span>weird</span>
+						<span>fast</span>
+						<span>useful</span>
+						<span>weird</span>
+					</span>
+				</span>
+				<span>things</span>
+			</span>
+			<span class="hero-title__line hero-title__final-line">
+				<span>for the web<span class="text-volt-600">.</span></span>
+				<span class="hero-title__cloud">
+					<img
+						class="animate-cloud-bob motion-reduce:animate-none"
+						src={cloud.src}
+						width={cloud.width}
+						height={cloud.height}
+						alt="A deadpan, bright green thought cloud"
+						fetchpriority="high"
+					/>
+				</span>
+			</span>
+		</span>
+	</h1>
+
+	<div class="hero__support" data-reveal>
+		<p class="hero__intro">
+			I’m <strong class="text-ink-900">Sam Young</strong> — a software engineer building fast,
+			useful products for the web, front to back.
 		</p>
-		<div class="flex flex-wrap gap-3">
-			<a class="sticker-button sticker-button--volt" href="#work"
-				>See the work <span aria-hidden="true">↓</span></a
-			>
-			<a class="sticker-button sticker-button--ink" href="#contact"
-				>Say hi</a
-			>
+		<div class="hero__actions">
+			<a class="sticker-button sticker-button--volt" href="#work">
+				See the work <span aria-hidden="true">↓</span>
+			</a>
+			<a class="sticker-button sticker-button--ink" href="#contact">Say hi</a>
 		</div>
 	</div>
 </section>
+
+<script>
+	const wordSection = document.querySelector<HTMLElement>("[data-hero-word-section]");
+	const wordTrack = document.querySelector<HTMLElement>("[data-hero-word-track]");
+	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+	if (wordSection && wordTrack && !reducedMotion.matches) {
+		const startWordCycle = () => wordTrack.classList.add("is-cycling");
+
+		if ("IntersectionObserver" in window) {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (!entries.some((entry) => entry.isIntersecting)) return;
+					startWordCycle();
+					observer.disconnect();
+				},
+				{ threshold: 0.2 },
+			);
+
+			observer.observe(wordSection);
+		} else {
+			startWordCycle();
+		}
+	}
+</script>
+
+<style>
+	.hero {
+		margin: 0 auto;
+		max-width: var(--container);
+		padding: clamp(28px, 6vw, 68px) var(--gutter) clamp(42px, 7vw, 84px);
+	}
+
+	.hero__eyebrow {
+		margin: 0 0 clamp(24px, 3vw, 38px);
+		text-align: center;
+	}
+
+	.hero-title {
+		--hero-cloud-gap: clamp(12px, 1.5vw, 22px);
+		--hero-cloud-size: clamp(92px, 11vw, 150px);
+
+		margin: 0 auto;
+		padding-bottom: clamp(22px, 2.8vw, 38px);
+		color: var(--color-ink-900);
+		font-family: var(--font-display);
+		font-size: clamp(58px, 8.6vw, 112px);
+		font-weight: 800;
+		letter-spacing: var(--tracking-tight);
+		line-height: 0.87;
+		text-align: center;
+		text-wrap: balance;
+		overflow: visible;
+	}
+
+	.hero-title__visual,
+	.hero-title__line {
+		display: block;
+		overflow: visible;
+	}
+
+	.hero-title__line {
+		padding-block: 0.06em 0.13em;
+		margin-block: -0.06em -0.13em;
+	}
+
+	.hero-title__word-line {
+		display: flex;
+		align-items: baseline;
+		justify-content: center;
+		gap: 0.12em;
+	}
+
+	.hero-word-slot {
+		display: inline-block;
+		flex: 0 0 auto;
+		width: 3em;
+		height: 1.08em;
+		font-family: var(--font-accent);
+		font-size: 0.7em;
+		font-weight: 400;
+		font-style: normal;
+		letter-spacing: -0.045em;
+		line-height: 1.08;
+		text-align: right;
+		transform: translateY(0.07em);
+		overflow: hidden;
+	}
+
+	.hero-word-track {
+		display: flex;
+		flex-direction: column;
+		will-change: transform;
+	}
+
+	.hero-word-track > span {
+		display: block;
+		flex: 0 0 1.08em;
+		height: 1.08em;
+		line-height: 1.08;
+	}
+
+	.hero-word-track.is-cycling {
+		animation: hero-word-cycle 3.2s cubic-bezier(0.76, 0, 0.24, 1) 0.45s 1 both;
+	}
+
+	.hero-title__final-line {
+		position: relative;
+		width: max-content;
+		margin-inline: auto;
+		transform: translateX(clamp(-84px, -7vw, -48px));
+	}
+
+	.hero-title__cloud {
+		position: absolute;
+		top: 50%;
+		left: calc(100% + var(--hero-cloud-gap));
+		display: block;
+		width: var(--hero-cloud-size);
+		transform: translateY(-50%);
+		pointer-events: none;
+	}
+
+	.hero-title__cloud img {
+		display: block;
+		width: 100%;
+		height: auto;
+		filter: drop-shadow(0 18px 22px rgba(14, 14, 12, 0.1));
+		will-change: transform;
+	}
+
+	.hero__support {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 22px;
+		margin-top: clamp(22px, 3vw, 40px);
+		text-align: center;
+	}
+
+	.hero__intro {
+		max-width: 46ch;
+		margin: 0;
+		font: var(--type-body-lg);
+	}
+
+	.hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 12px;
+	}
+
+	@keyframes hero-word-cycle {
+		0%,
+		16% {
+			transform: translate3d(0, 0, 0);
+		}
+
+		30%,
+		42% {
+			transform: translate3d(0, -1.08em, 0);
+		}
+
+		56%,
+		68% {
+			transform: translate3d(0, -2.16em, 0);
+		}
+
+		82%,
+		100% {
+			transform: translate3d(0, -3.24em, 0);
+		}
+	}
+
+	@media (max-width: 760px) {
+		.hero {
+			padding-top: 30px;
+		}
+
+		.hero-title {
+			--hero-cloud-gap: clamp(8px, 2.5vw, 12px);
+			--hero-cloud-size: clamp(68px, 20vw, 90px);
+
+			font-size: clamp(42px, 10.8vw, 72px);
+			line-height: 0.9;
+		}
+
+		.hero-title__final-line {
+			transform: translateX(-40px);
+		}
+
+		.hero__support {
+			margin-top: 28px;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.hero-title {
+			padding-bottom: 106px;
+			font-size: clamp(40px, 11vw, 44px);
+		}
+
+		.hero-title__final-line {
+			transform: none;
+		}
+
+		.hero-title__cloud {
+			top: calc(100% + 10px);
+			right: 0;
+			left: auto;
+			transform: none;
+		}
+	}
+
+	@media (max-width: 360px) {
+		.hero-title {
+			font-size: 39px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-word-track {
+			animation: none;
+			transform: none;
+			will-change: auto;
+		}
+
+		.hero-title__cloud img {
+			will-change: auto;
+		}
+	}
+</style>
