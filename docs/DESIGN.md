@@ -21,8 +21,10 @@ motion.
 - Use `#FBF8F1` paper, `#0E0E0C` ink, and `#D6FF3F` Volt as the default site
   palette. Cobalt, Flush, and gradients are not part of the default UI.
 - Use Bricolage Grotesque for display type, Geist for body/UI copy, and
-  JetBrains Mono for labels and metadata. The handoff supplies Google Fonts
-  stand-ins, not self-hosted font files.
+  JetBrains Mono for labels and metadata. Gloock is a deliberately narrow
+  accent role for the hero's cycling adjective and the marquee's “weird”
+  phrases; it does not replace the primary display face. The handoff supplies
+  Google Fonts stand-ins, not self-hosted font files.
 - Keep a 4px spacing rhythm, fluid gutters, containers up to 1320px, small
   technical radii, structural ink borders, and blur-free hard shadows.
 - Typeset the `SY` tile and `sam.young` wordmark in markup. There is no raster
@@ -41,8 +43,9 @@ styles) but must not create a parallel palette or type system.
 ## Site map
 
 1. Sticky header with the logo and Work, About, and Contact anchors.
-2. Hero with the software-engineer label, oversized headline, short
-   introduction, work/contact calls to action, and the thought-cloud mascot.
+2. Hero with the software-engineer label, centered three-line headline, short
+   introduction, work/contact calls to action, and the thought-cloud mascot as
+   punctuation beside (or, on phones, beneath) the final headline line.
 3. Full-width decorative marquee looping the hero’s “weird / fast / useful”,
    followed by a responsive project-card grid.
 4. Inverted About section with a cloud cameo and compact site-stack chips.
@@ -61,21 +64,29 @@ styles) but must not create a parallel palette or type system.
   departs from the handoff’s “Selected work” label: it mixes lightly playful,
   work-relevant phrases and emoji (“weird ideas 👾”, “fast builds ⚡”, “useful
   things 🛠️”, and “thoughtful details 💭”) and is `aria-hidden` as pure
-  decoration, since the section heading provides the accessible label.
+  decoration, since the section heading provides the accessible label. Its
+  “weird” phrases use the same upright Gloock accent as the hero word slot.
+- The hero's adjective cycles once on entry through “weird → fast → useful →
+  weird”, then rests on “weird”. The visual variants are presentational; the
+  heading keeps one stable accessible name containing all three ideas.
 - Buttons lift and grow their hard shadow on hover, then press flat on active.
 - Hero, About, and footer cloud instances share one bob (`translateY` 0 → −20px
-  over 5s, `ease-in-out`) so their vertical motion and timing align exactly; the
-  About cameo keeps its horizontal mirror via a flipped variant of that bob.
+  over 5s, `ease-in-out`) so their vertical motion and timing align exactly. The
+  hero cloud is independently positioned outside the headline's word mask, and
+  the About cameo keeps its horizontal mirror via a flipped variant of the bob.
 - Clicking an in-page anchor (nav, skip link, logo, hero CTAs) smooth-scrolls to
   the section with a header offset, via Lenis when motion is allowed and native
   smooth scroll otherwise.
 - `prefers-reduced-motion` disables smooth scrolling, cloud motion, the marquee,
-  and reveal movement.
+  hero word cycling, and reveal movement. Without JavaScript, the hero also
+  remains on its first “weird” frame.
 
 ## Deliberate departures
 
-- `sam-hero` is not used. Per Sam’s direction, `sam-cloud` is enlarged to occupy
-  the hero-image position by itself and remains the only raster site asset.
+- `sam-hero` is not used. Per Sam’s direction, `sam-cloud` remains the only
+  raster site asset and now acts as independently animated punctuation beside
+  the hero title rather than occupying a separate image column. At phone widths
+  it moves beneath the final line to keep the lockup unclipped.
 - Prototype projects, years, metrics, tools, links, social profiles, and contact
   details were not accepted as factual portfolio content; the standalone
   export’s six demo projects and generic tool list are design fixtures, not a
@@ -104,8 +115,10 @@ styles) but must not create a parallel palette or type system.
 - The Hero and Work sections were narrowed from the 1320px wide container to the
   1080px container to tighten the overall measure and unify section widths; the
   `--container-wide` token is retained but no longer used by default. The Hero
-  also uses a tighter vertical rhythm so its content begins closer to the sticky
-  navigation and the marquee arrives sooner.
+  replaces the former two-column composition with a centered lockup and stacked
+  supporting copy/actions. Its headline lines remain overflow-visible; only the
+  adjective track is masked, preventing descenders and cloud motion from being
+  cropped.
 - Project cards were made more compact (shorter body, tighter padding, smaller
   glyph and title) while keeping the 3 → 2 → 1 responsive grid and sticker
   look. In-progress cards occupy a centered row beneath shipped work at desktop

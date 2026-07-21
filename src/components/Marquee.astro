@@ -21,7 +21,9 @@ const items = [
 				<div class="flex flex-shrink-0 items-center gap-[clamp(24px,4vw,56px)] whitespace-nowrap py-3 px-[clamp(12px,2vw,28px)] [font:600_clamp(16px,2vw,19px)/1_var(--font-display)]">
 					{items.map(({ word, emoji }) => (
 						<span class="inline-flex items-center gap-2">
-							<span class:list={[word.startsWith("weird") && "italic"]}>{word}</span>
+							<span class:list={[word.startsWith("weird") && "font-accent font-normal"]}>
+								{word}
+							</span>
 							<span class="text-[0.9em]">
 								{emoji}
 							</span>
